@@ -15,10 +15,6 @@ public class BbsFileService {
 		file.setFileName(bbsFile.getFileName());
 		file.setFileRealName(bbsFile.getFileRealName());
 
-		Bbs bbs = new Bbs();
-		bbs.setBbsId(bbsFile.getBbs().getBbsId());
-		file.setBbs(bbs);
-
 		User user = new User();
 		user.setUserId(bbsFile.getUser().getUserId());
 		file.setUser(user);

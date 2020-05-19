@@ -9,6 +9,7 @@ import org.apache.commons.codec.digest.DigestUtils;
 import com.MyshoppingMall.bbs.checkFunction.JoinCheckFunction;
 import com.MyshoppingMall.bbs.checkFunction.LoginCheckFunction;
 import com.MyshoppingMall.bbs.util.ConnUtil;
+import com.MyshoppingMall.bbs.util.QueryUtil;
 import com.MyshoppingMall.bbs.vo.User;
 
 public class UserDAO {
@@ -24,7 +25,7 @@ public class UserDAO {
 	}
 
 	/**
-	 * userId¿Í userPassword¸¦ µ¥ÀÌÅÍº£ÀÌ½º¿¡ ÀÔ·Â¹Þ¾Æ, µÎ°³ÀÇ °ªÀÌ ÀÏÄ¡ÇÏ´ÂÁö È®ÀÎÇÏ´Â ¸Þ¼Òµå
+	 * userIdï¿½ï¿½ userPasswordï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Íºï¿½ï¿½Ì½ï¿½ï¿½ï¿½ ï¿½Ô·Â¹Þ¾ï¿½, ï¿½Î°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½Ï´ï¿½ï¿½ï¿½ È®ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Þ¼Òµï¿½
 	 * @param userId
 	 * @param userPassword
 	 * @return
@@ -63,7 +64,7 @@ public class UserDAO {
 		return LoginCheckFunction.DATABASE_ERROR;
 	}
 	/**
-	 * String userId¸¦ ÀÔ·Â¹Þ¾Æ, id,name,gender,email¸¦ ¸®ÅÏ ¹Þ´Â ¸Þ¼Òµå
+	 * String userIdï¿½ï¿½ ï¿½Ô·Â¹Þ¾ï¿½, id,name,gender,emailï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Þ´ï¿½ ï¿½Þ¼Òµï¿½
 	 * @param userId
 	 * @return
 	 */
@@ -100,14 +101,14 @@ public class UserDAO {
 		return user;
 	}
 	/**
-	 * userId,password,name,gender,emailÀ» ¼ø¼­´ë·Î ÀÔ·Â¹Þ¾Æ µ¥ÀÌÅÍº£ÀÌ½º¿¡ µî·ÏÇÏ´Â ¸Þ¼Òµå
+	 * userId,password,name,gender,emailï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·Â¹Þ¾ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Íºï¿½ï¿½Ì½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Þ¼Òµï¿½
 	 * @param user
 	 * @return
 	 */
 	public int addUser(User user) {
 
 		try {
-			String query ="INSERT INTO BBS_USER VALUES (?,?,?,?,?)"; 
+			String query = QueryUtil.getSQL("User.addUser");
 			
 			conn = ConnUtil.getConnection();
 			pstmt = conn.prepareStatement(query);
@@ -132,14 +133,10 @@ public class UserDAO {
 		}
 		return JoinCheckFunction.JOIN_FAIL;
 	}
-	/**
-	 * userId°¡ Á¸ÀçÇÏ´ÂÁö È®ÀÎÇÏ´Â ¸Þ¼Òµå
-	 * @param userId
-	 * @return
-	 */
+	
 	public int existUser(String userId) {
 		
-		String query ="SELECT user_id FROM BBS_USER WHERE USER_ID = ? ";
+		String query = QueryUtil.getSQL("User.existUser");
 		
 		try {
 			conn = ConnUtil.getConnection();
@@ -167,14 +164,10 @@ public class UserDAO {
 		}
 		return JoinCheckFunction.NON_EXIST_USER;
 	}
-	/**
-	 * È¸¿øÅ»Åð½Ã »ç¿ëÇÒ ¸Þ¼Òµå, userId ¿Í userPassword¸¦ ÀÔ·Â¹Þ¾Æ ÇØ´ç È¸¿øÀ» DB¿¡¼­ »èÁ¦ÇÑ´Ù.	
-	 * @param userId
-	 * @param userPassword
-	 */
-	public void DeleteUser(String userId, String userPassword) {
+	
+	public void deleteUser(String userId, String userPassword) {
 		
-		String query ="DELETE FROM BBS_USER WHERE USER_ID = ? AND USER_PASSWORD =  ? ";
+		String query = QueryUtil.getSQL("User.deleteUser");
 		
 		try {
 			conn = ConnUtil.getConnection();
@@ -197,16 +190,10 @@ public class UserDAO {
 		}
 		
 	}
-	/**
-	 * ¾÷µ¥ÀÌÆ® ÇÒ user °´Ã¼¸¦ Àü´Þ ¹Þ°í, userPasswor º¯¼ö¸¦ Àü´Þ¹Þ¾Æ, id¿Í password°¡ ÀÏÄ¡ÇÏ´Â ¾ÆÀÌµðÀÇ ÆÐ½º¿öµå, emailÀ» ¼öÁ¤ÇÑ´Ù.  
-	 * @param user
-	 * @param userPassword
-	 */
+	
 	public void updateUser(User user, String userPassword) {
 		
-		String query = "UPDATE BBS_USER"
-					+ " SET user_password = ?, user_email = ? "
-					+ " WHERE USER_ID = ? AND USER_PASSWORD = ?";
+		String query = QueryUtil.getSQL("User.updateUser");
 		
 		try {
 			conn = ConnUtil.getConnection();

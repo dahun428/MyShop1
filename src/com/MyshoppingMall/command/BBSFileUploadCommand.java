@@ -2,11 +2,11 @@ package com.MyshoppingMall.command;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import javax.servlet.http.HttpSession;
 
 import com.MyshoppingMall.bbs.checkFunction.BBSFileCheckFunction;
 import com.MyshoppingMall.bbs.util.BbsFileUtil;
-import com.MyshoppingMall.bbs.vo.Bbs;
+import com.MyshoppingMall.bbs.util.DirectoryUtil;
 import com.MyshoppingMall.bbs.vo.BbsFile;
 import com.MyshoppingMall.bbs.vo.User;
 import com.MyshoppingMall.service.BbsFileService;
@@ -15,11 +15,10 @@ import com.MyshoppingMall.service.UserService;
 public class BBSFileUploadCommand implements Bcommand{
 
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
-		String directory = "C:\\Projects\\Jsp\\BBS\\WebContent\\upload";
+		String directory = DirectoryUtil.getSQL("fileLoad.directory");
 
-
-		String userId = request.getParameter("user_id");
-		int bbsId = Integer.parseInt(request.getParameter("bbs_id"));
+		HttpSession session = request.getSession();
+		String userId = (String) session.getAttribute("userId");
 		
 		UserService userService = new UserService();
 		if(userService.getUserByUserId(userId)) {
@@ -32,11 +31,6 @@ public class BBSFileUploadCommand implements Bcommand{
 			User user = new User();
 			user.setUserId(userId);
 			bbsFile.setUser(user);
-			
-			Bbs bbs = new Bbs();
-			bbs.setBbsId(bbsId);
-			bbsFile.setBbs(bbs);
-			
 			
 			BbsFileService fileService = new BbsFileService();
 			

@@ -7,7 +7,7 @@ import java.sql.SQLException;
 
 import com.MyshoppingMall.bbs.checkFunction.BBSFileCheckFunction;
 import com.MyshoppingMall.bbs.util.ConnUtil;
-import com.MyshoppingMall.bbs.vo.Bbs;
+import com.MyshoppingMall.bbs.util.QueryUtil;
 import com.MyshoppingMall.bbs.vo.BbsFile;
 import com.MyshoppingMall.bbs.vo.User;
 
@@ -25,7 +25,7 @@ public class BbsFileDAO {
 
 	public int addBbsFile(BbsFile bbsFile) {
 
-		String query = "INSERT INTO BBS_FILE (FILE_NO, FILE_NAME, FILE_REAL_NAME, USER_ID, BBS_ID) VALUES(BBS_FILE_SEQ.NEXTVAL, ?, ?, ?, ?) ";
+		String query = QueryUtil.getSQL("BBSFile.addBbsFile");
 
 		try {
 			conn = ConnUtil.getConnection();
@@ -33,7 +33,6 @@ public class BbsFileDAO {
 			pstmt.setString(1, bbsFile.getFileName());
 			pstmt.setString(2, bbsFile.getFileRealName());
 			pstmt.setString(3, bbsFile.getUser().getUserId());
-			pstmt.setInt(4, bbsFile.getBbs().getBbsId());
 			pstmt.executeQuery();
 
 			return BBSFileCheckFunction.BBS_FILE_UPLOAD_SUCCESS;
@@ -54,7 +53,7 @@ public class BbsFileDAO {
 
 	public BbsFile getBbsFileByFileNo(int fileNo) {
 
-		String query ="SELECT FILE_NO, FILE_NAME, FILE_REAL_NAME, USER_ID, BBS_ID, REGISTERED_DATE FROM BBS_FILE WHERE FILE_NO = ? ";
+		String query = QueryUtil.getSQL("BBSFile.getBbsFileByFileNo");
 
 		try {
 			conn = ConnUtil.getConnection();
@@ -87,7 +86,7 @@ public class BbsFileDAO {
 
 	public BbsFile getBbsFileByFileName(String fileName) {
 		
-		String query ="SELECT FILE_NO, FILE_NAME, FILE_REAL_NAME, USER_ID, BBS_ID, REGISTERED_DATE FROM BBS_FILE WHERE FILE_NAME = ? ";
+		String query = QueryUtil.getSQL("BBSFile.getBbsFileByFileName");
 
 		try {
 			conn = ConnUtil.getConnection();
@@ -119,7 +118,7 @@ public class BbsFileDAO {
 	}
 	public String getBbsFileRealNameByFileName(String fileName) {
 
-		String query = "SELECT FILE_REAL_NAME FROM BBS_FILE WHERE FILE_NAME =  ? ";
+		String query = QueryUtil.getSQL("BBSFile.getBbsFileRealNameByFileName");
 		
 		try {
 			conn = ConnUtil.getConnection();
@@ -160,10 +159,6 @@ public class BbsFileDAO {
 		User user = new User();
 		user.setUserId(rs.getString("user_id"));
 		bbsFile.setUser(user);
-
-		Bbs bbs = new Bbs();
-		bbs.setBbsId(rs.getInt("bbs_id"));
-		bbsFile.setBbs(bbs);
 		bbsFile.setRegisteredDate(rs.getDate("registered_date"));
 
 		return bbsFile;

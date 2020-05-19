@@ -9,9 +9,17 @@ public class Bbs {
 	private String bbsDate;
 	private String bbsContent;
 	private int bbsAvailable;
+	private BbsFile bbsFile;
 	
 	public Bbs(){}
 
+	
+	public void setBbsFile(BbsFile bbsFile) {
+		this.bbsFile = bbsFile;
+	}
+	public BbsFile getBbsFile() {
+		return bbsFile;
+	}
 	public void setBbsNo(int bbsNo) {
 		this.bbsNo = bbsNo;
 	}

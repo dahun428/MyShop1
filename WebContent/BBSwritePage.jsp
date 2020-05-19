@@ -52,7 +52,6 @@
 						<tr>
 							<td><input type="text" class="form-control"
 								placeholder="글제목" name="bbsTitle" maxlength="50" /></td>
-
 						</tr>
 						<!-- 파일 업로드  -->
 						<tr>
@@ -68,19 +67,19 @@
 										out.write("<a href=\"" + path + "/downloadAction?file=" + URLEncoder.encode(fileName, "utf-8") + "\">" + fileRealName
 											+ "</a>");
 										%>
-	
+										<c:set var="fileName" value="${bbsFileName }"/>
+										<c:set var="fileRealName" value="${bbsFileName }"/>
+											
 								</c:if>
 							</td>
-
 						</tr>
+						<!-- 이미지 업로드 -->
 						<tr>
 							<td style="text-align: left;"><button type="button" class="btn btn-primary"
 									data-toggle="modal" data-target="#staticBackdrop">이미지 업로드</button>
-
 							</td>
 						</tr>
 						<tr>
-
 							<td><textarea class="form-control" placeholder="글내용"
 									name="bbsContent" maxlength="2048" style="height: 350px;" /></textarea></td>
 						</tr>
@@ -92,7 +91,7 @@
 		</div>
 	</div>
 	<%@include file="../View_page_file/footerPage.jsp"%>
-	<!-- Modal -->
+	<!-- 파일업로드 Modal -->
 	<div class="modal fade" id="staticBackdrop" data-backdrop="static"
 		data-keyboard="false" tabindex="-1" role="dialog"
 		aria-labelledby="staticBackdropLabel" aria-hidden="true">
