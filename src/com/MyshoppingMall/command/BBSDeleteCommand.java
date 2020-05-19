@@ -4,9 +4,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.MyshoppingMall.bbs.checkFunction.BBSCheckFunction;
+import com.MyshoppingMall.bbs.checkFunction.UserCheckFunction;
 import com.MyshoppingMall.bbs.dao.BbsDAO;
 import com.MyshoppingMall.bbs.dao.UserDAO;
-import com.MyshoppingMall.bbs.util.UserCheckFunction;
 import com.MyshoppingMall.bbs.vo.Bbs;
 
 public class BBSDeleteCommand implements Bcommand {

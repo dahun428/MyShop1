@@ -11,7 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.MyshoppingMall.command.BBSCommand;
 import com.MyshoppingMall.command.BBSDeleteCommand;
-import com.MyshoppingMall.command.BBSFileCommand;
+import com.MyshoppingMall.command.BBSFileDownloadCommand;
+import com.MyshoppingMall.command.BBSFileUploadCommand;
 import com.MyshoppingMall.command.BBSUpdateCommand;
 import com.MyshoppingMall.command.BBSWriteCommand;
 import com.MyshoppingMall.command.BBSViewCommand;
@@ -105,12 +106,11 @@ public class FrontController extends HttpServlet {
 			command = new BBSDeleteCommand();
 			command.execute(request, response);
 			viewPage = "CheckPage/bbsDeleteCheck.jsp";
+		//파일 업로드기능	
 		} else if(com.equals("/BBSfileUploadPageAction.do")) {
-			viewPage = "BBSfileUploadPageAction.jsp";
-		} else if(com.equals("/BBSfileUploadPage.do")) {
-			command = new BBSFileCommand();
+			command = new BBSFileUploadCommand();
 			command.execute(request, response);
-			viewPage = "BBSfileUploadPage.jsp";
+			viewPage = "BBSwritePage.jsp";
 		}
 		
 		RequestDispatcher rd = request.getRequestDispatcher(viewPage);

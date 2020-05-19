@@ -3,8 +3,8 @@ package com.MyshoppingMall.command;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.MyshoppingMall.bbs.checkFunction.UserCheckFunction;
 import com.MyshoppingMall.bbs.dao.UserDAO;
-import com.MyshoppingMall.bbs.util.UserCheckFunction;
 import com.MyshoppingMall.bbs.vo.User;
 
 public class BJoinCommand implements Bcommand{

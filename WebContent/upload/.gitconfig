@@ -1,0 +1,13 @@
+[user]
+	name = dahun428
+	email = rubcustomer@gmail.com
+[gui]
+	recentrepo = C:/Projects/Java_workspace/basic
+[i18n]
+	commitEncoding = utf-8
+	logOutputEncoding = utf-8
+[filter "lfs"]
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f

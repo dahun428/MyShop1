@@ -1,5 +1,5 @@
 <%@page import="java.io.PrintWriter"%>
-<%@page import="com.MyshoppingMall.bbs.util.UserCheckFunction"%>
+<%@page import="com.MyshoppingMall.bbs.checkFunction.UserCheckFunction"%>
 <%@page import="com.MyshoppingMall.bbs.dao.UserDAO"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 <%@ page language="java" contentType="text/html; charset=utf-8"

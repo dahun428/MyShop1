@@ -1,4 +1,4 @@
-package com.MyshoppingMall.bbs.util;
+package com.MyshoppingMall.bbs.checkFunction;
 
 public class UserCheckFunction {
 

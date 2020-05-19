@@ -1,5 +1,7 @@
 package com.MyshoppingMall.bbs.vo;
 
+import java.util.Date;
+
 public class User {
 
 	private String userId;
@@ -7,9 +9,18 @@ public class User {
 	private String userName;
 	private String userGender;
 	private String userEmail;
-	
+	private Date RegisteredDate;
+
 	public User() {}
 
+
+
+	public Date getRegisteredDate() {
+		return RegisteredDate;
+	}
+	public void setRegisteredDate(Date registeredDate) {
+		RegisteredDate = registeredDate;
+	}
 	public String getUserId() {
 		return userId;
 	}
@@ -49,7 +60,7 @@ public class User {
 	public void setUserEmail(String userEmail) {
 		this.userEmail = userEmail;
 	}
-	
-	
-	
+
+
+
 }
