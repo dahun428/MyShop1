@@ -1,0 +1,43 @@
+//file_name_change_function
+$(document).ready(function(){
+	$("#bbs-file-set").on('change', function(){
+		var fileName;
+		if(window.FileReader){
+			fileName = $(this)[0].files[0].name;
+		} else {
+			fileName = $(this).val().split('/').pop().split('\\').pop();
+		}
+		$("#userfile").val(fileName);
+		$("#input-btn").on('click','label', function(event){
+				console.log('a');
+				$('#input-btn').on('click','label',function(){
+					console.log('b');
+					var userfileName = $('#userfile').val();
+					$.ajax({
+						type:'POST',
+						data:{userfileName:userfileName},
+						url:'deleteFileAction',
+						contentType:"application/x-json; charset=UTF-8",
+						datatype:"json",
+						success:function(){
+							alert('삭제가완료되었습니다.');
+						},
+						error:function(e){
+							alert('error');
+						}
+						
+						
+						
+						
+					});
+					
+				});
+			
+			
+			
+		});
+			
+		
+	});
+	
+});	
