@@ -22,11 +22,46 @@ public class BbsFileDAO {
 		return instance;
 	}
 
+	/**
+	 * 업로드 기능이 끝난후 FILE_NO 를 반환한다.
+	 * @return
+	 */
+	public BbsFile recentBbsFileNo() {
 
+		String query = "SELECT BBS_FILE_SEQ.CURRVAL AS FILE_NO FROM DUAL ";
+		
+		BbsFile bbsFile = null;
+
+		try {
+			conn = ConnUtil.getConnection();
+			pstmt = conn.prepareStatement(query);
+			rs = pstmt.executeQuery();
+
+			if(rs.next()) {
+				
+				bbsFile = new BbsFile();
+				bbsFile.setFileNo(rs.getInt("FILE_NO"));
+			}
+			return bbsFile;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs != null) rs.close();
+				if(pstmt != null) pstmt.close();
+				if(conn != null) conn.close();
+
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return bbsFile;
+	}
 	public int addBbsFile(BbsFile bbsFile) {
 
-		String query = QueryUtil.getSQL("BBSFile.addBbsFile");
-
+		String query = QueryUtil.getSQL("BBSFile.addBbsFile_1");
+		String query1 = QueryUtil.getSQL("BBSFile.addBbsFile_2");
 		try {
 			conn = ConnUtil.getConnection();
 			pstmt = conn.prepareStatement(query);
@@ -34,8 +69,14 @@ public class BbsFileDAO {
 			pstmt.setString(2, bbsFile.getFileRealName());
 			pstmt.setString(3, bbsFile.getUser().getUserId());
 			pstmt.executeQuery();
+			pstmt = conn.prepareStatement(query1);
+			rs = pstmt.executeQuery();
 
-			return BBSFileCheckFunction.BBS_FILE_UPLOAD_SUCCESS;
+			if(rs.next()) {
+				return rs.getInt("FILE_NO");
+			}
+			
+			return BBSFileCheckFunction.BBS_FILE_UPLOAD_FAIL;
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -48,7 +89,7 @@ public class BbsFileDAO {
 			}
 		}
 
-		return BBSFileCheckFunction.BBS_FILE_UPLOAD_FAIL;
+		return BBSFileCheckFunction.BBS_FILE_DATA_BASE_ERROR;
 	}
 
 	public BbsFile getBbsFileByFileNo(int fileNo) {
@@ -85,7 +126,7 @@ public class BbsFileDAO {
 	}
 
 	public BbsFile getBbsFileByFileName(String fileName) {
-		
+
 		String query = QueryUtil.getSQL("BBSFile.getBbsFileByFileName");
 
 		try {
@@ -119,7 +160,7 @@ public class BbsFileDAO {
 	public String getBbsFileRealNameByFileName(String fileName) {
 
 		String query = QueryUtil.getSQL("BBSFile.getBbsFileRealNameByFileName");
-		
+
 		try {
 			conn = ConnUtil.getConnection();
 			pstmt = conn.prepareStatement(query);
@@ -127,7 +168,7 @@ public class BbsFileDAO {
 			rs = pstmt.executeQuery();
 
 			if(rs.next()) {
-				
+
 				return rs.getString(1);
 			}
 
@@ -147,6 +188,34 @@ public class BbsFileDAO {
 		return null;
 	}
 
+	public int updateFile(BbsFile bbsFile) {
+		
+		String query = "UPDATE BBS_FILE SET FILE_NAME = ? , FILE_REAL_NAME = ?, REGISTERED_DATE = sysdate WHERE FILE_NO = ? ";
+		
+		try {
+			conn = ConnUtil.getConnection();
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, bbsFile.getFileName());
+			pstmt.setString(2, bbsFile.getFileRealName());
+			pstmt.setInt(3, bbsFile.getFileNo());
+			pstmt.executeUpdate();
+			
+			return BBSFileCheckFunction.BBS_FILE_UPDATE_SUCCESS;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs != null) rs.close();
+				if(pstmt != null) pstmt.close();
+				if(conn != null) conn.close();
+
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return BBSFileCheckFunction.BBS_FILE_UPDATE_FAIL;
+	}
 
 
 	private BbsFile resultSetForm(ResultSet rs) throws SQLException {

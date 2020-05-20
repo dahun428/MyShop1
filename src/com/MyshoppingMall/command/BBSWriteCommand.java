@@ -20,8 +20,9 @@ public class BBSWriteCommand implements Bcommand {
 		String bbsTitle = request.getParameter("bbsTitle");
 		String bbsContent = request.getParameter("bbsContent");
 		String userId = (String) session.getAttribute("userId");
+		int fileNo = Integer.parseInt(request.getParameter("fileNo"));
 
-		int isSuccess = bbsService.addBbs(bbsTitle, bbsContent, userId);
+		int isSuccess = bbsService.addBbs(bbsTitle, bbsContent, userId, fileNo);
 		
 		if(isSuccess == BBSCheckFunction.BBS_WRITE_SUCCESS) {
 			request.setAttribute("isSuccess", BBSCheckFunction.BBS_WRITE_SUCCESS);

@@ -8,9 +8,12 @@ import com.MyshoppingMall.bbs.vo.User;
 public class BbsFileService {
 
 	BbsFileDAO fileDao = new BbsFileDAO();
-	
-	public void uploadFile (BbsFile bbsFile) {
-
+	/**
+	 * 업로드기능
+	 * 	BbsFile 객체 업로드 한 후 불러와야 하는 메소드 FileNO의 값을 리턴 받는다.
+	 */
+	public int uploadFile (BbsFile bbsFile) {
+		
 		BbsFile file = new BbsFile();
 		file.setFileName(bbsFile.getFileName());
 		file.setFileRealName(bbsFile.getFileRealName());
@@ -18,11 +21,16 @@ public class BbsFileService {
 		User user = new User();
 		user.setUserId(bbsFile.getUser().getUserId());
 		file.setUser(user);
-
-		BbsFileDAO fileDao = new BbsFileDAO();
-
-		fileDao.addBbsFile(file);
-
+		
+		return fileDao.addBbsFile(file);
+	}
+	public int updateFile(int fileNo) {
+		
+		BbsFile bbsFileCheck = fileDao.getBbsFileByFileNo(fileNo);
+		BbsFile bbsFile = new BbsFile();
+		bbsFile.setFileNo(fileNo);
+		
+		return -1;
 	}
 
 	public BbsFile getBbsFileByFileNo(int fileNo) {

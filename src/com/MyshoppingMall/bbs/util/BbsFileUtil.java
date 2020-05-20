@@ -29,6 +29,16 @@ public class BbsFileUtil {
 
 	}
 
+	public static void fileDeleteExecute(HttpServletRequest request, BbsFile bbsFile, String directory) {
+		
+		String fileName = bbsFile.getFileName();
+		String uploadFileName = (directory + "/" + fileName);
+		
+		File uploadFile = new File(uploadFileName);
+		if(uploadFile.exists() && uploadFile.isFile()) {
+			uploadFile.delete();
+		}
+	}
 	public static BbsFile fileUploadExecute(HttpServletRequest request, String directory) {
 
 

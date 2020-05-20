@@ -1,3 +1,5 @@
+<%@page import="com.MyshoppingMall.bbs.vo.BbsFile"%>
+<%@page import="java.net.URLEncoder"%>
 <%@page import="com.MyshoppingMall.bbs.checkFunction.BBSCheckFunction"%>
 <%@page import="com.MyshoppingMall.bbs.vo.Bbs"%>
 <%@page import="java.util.List"%>
@@ -59,6 +61,16 @@
 						<td>${bbs.user.userId }</td>
 						<td style="background-color: #eeeeee;">작성일자</td>
 						<td>${bbs.bbsDate }</td>
+					</tr>
+					<tr>
+						<td style="background-color: #eeeeee;">첨부파일</td>
+						<td>
+							<c:if test="${bbsFile.fileNo ne 0 }">
+								<a href="downloadAction?file=${bbsFile.fileName }"><c:out value="${bbsFile.fileRealName }"/></a>
+							</c:if>
+						</td>
+						<td style="background-color: #eeeeee;">이미지파일</td>
+						<td></td>
 					</tr>
 					<tr>
 						<td colspan="4" style="background-color: #eeeeee;">내용</td>

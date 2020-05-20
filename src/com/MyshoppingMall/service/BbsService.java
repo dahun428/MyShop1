@@ -5,6 +5,7 @@ import java.util.List;
 import com.MyshoppingMall.bbs.checkFunction.BBSCheckFunction;
 import com.MyshoppingMall.bbs.dao.BbsDAO;
 import com.MyshoppingMall.bbs.vo.Bbs;
+import com.MyshoppingMall.bbs.vo.BbsFile;
 import com.MyshoppingMall.bbs.vo.BbsPage;
 import com.MyshoppingMall.bbs.vo.User;
 
@@ -40,7 +41,7 @@ public class BbsService {
 			return new BbsPage(total, pageNum, size, contents);
 	}
 	
-	public int addBbs(String bbsTitle, String bbsContent, String userId) {
+	public int addBbs(String bbsTitle, String bbsContent, String userId, int fileNo) {
 		
 		Bbs bbs = new Bbs();
 		bbs.setBbsTitle(bbsTitle);
@@ -50,6 +51,10 @@ public class BbsService {
 		user.setUserId(userId);
 		bbs.setUser(user);
 		
+		BbsFile bbsFile = new BbsFile();
+		bbsFile.setFileNo(fileNo);
+		bbs.setBbsFile(bbsFile);
+		
 		int isSuccess = bbsDao.addBbs(bbs);
 		
 		if(isSuccess ==  BBSCheckFunction.BBS_WRITE_SUCCESS) {
@@ -57,6 +62,11 @@ public class BbsService {
 		}
 		
 		return BBSCheckFunction.BBS_DATABASE_ERROR;
+	}
+	public Bbs getBbsBybbsId(int bbsId) {
+		
+		Bbs bbs = bbsDao.getBbsBybbsId(bbsId);
+		return bbs;
 	}
 	
 	

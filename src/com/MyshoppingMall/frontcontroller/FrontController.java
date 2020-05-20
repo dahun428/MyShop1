@@ -57,43 +57,43 @@ public class FrontController extends HttpServlet {
 		String conPath = request.getContextPath();
 		String com = url.substring(conPath.length());
 		
-		//·Î±×ÀÎ
+		//ë¡œê·¸ì¸ í˜ì´ì§€
 		if(com.equals("/login.do")) {
 			command = new BLoginCommand();
 			command.execute(request, response);
 			viewPage = "CheckPage/loginCheck.jsp";
-		//È¸¿ø°¡ÀÔ	
+		//íšŒì›ê°€ì… í˜ì´ì§€
 		} else if (com.equals("/join.do")){
 			command = new BJoinCommand();
 			command.execute(request, response);
 			viewPage = "CheckPage/joinCheck.jsp";
-		//·Î±×¾Æ¿ô
+		//ë¡œê·¸ì•„ì›ƒ í˜ì´ì§€
 		} else if (com.equals("/logout.do")) {
 			viewPage = "CheckPage/logoutCheck.jsp";
-		//È¨À¸·Î µ¹¾Æ°¡±â
+		//í™ˆ í˜ì´ì§€
 		} else if (com.equals("/index.do")) {
 			viewPage = "index.jsp";
-		//°Ô½ÃÆÇ ¸ŞÀÎÀ¸·Î µ¹¾Æ°¡±â	
+		//ê²Œì‹œíŒ ë©”ì¸ í˜ì´ì§€	
 		} else if (com.equals("/BBSmainPage.do")) {
 			command = new BBSCommand();
 			command.execute(request, response);
 			viewPage = "BBSmainPage.jsp";
-		//°Ô½ÃÆÇ °Ë»ö
+		//ê²Œì‹œíŒ ê²€ìƒ‰ í˜ì´ì§€
 		} else if (com.equals("/BBSsearch.do")) {
 			command = new BBSCommand();
 			command.execute(request, response);
 			viewPage = "BBSmainPage.do";
-		//°Ô½ÃÆÇ ±Û¾²±â
+		//ê²Œì‹œíŒ ì‘ì„± í˜ì´ì§€
 		} else if (com.equals("/BBSwrite.do")) {
 			command = new BBSWriteCommand();
 			command.execute(request, response);
 			viewPage = "CheckPage/bbsWriteCheck.jsp";
-		//°Ô½ÃÆÇ Á¶È¸
+		//ê²Œì‹œíŒ ìì„¸íˆ ë³´ê¸° í˜ì´ì§€
 		} else if(com.equals("/BBSviewPage.do")) {
 			command = new BBSViewCommand();
 			command.execute(request, response);
 			viewPage = "BBSviewPage.jsp";
-		//°Ô½ÃÆÇ ¼öÁ¤	
+		//ê²Œì‹œíŒ ìˆ˜ì •ê¸°ëŠ¥ ì‹¤í–‰
 		} else if(com.equals("/BBSupdatePage.do")) {
 			command = new BBSViewCommand();
 			command.execute(request, response);
@@ -102,16 +102,22 @@ public class FrontController extends HttpServlet {
 			command = new BBSUpdateCommand();
 			command.execute(request, response);
 			viewPage = "BBSviewPage.do";
+		//ê²Œì‹œíŒ ì‚­ì œ ê¸°ëŠ¥ ì‹¤í–‰	
 		} else if(com.equals("/BBSdelete.do")) {
 			command = new BBSDeleteCommand();
 			command.execute(request, response);
 			viewPage = "CheckPage/bbsDeleteCheck.jsp";
-		//ÆÄÀÏ ¾÷·Îµå±â´É	
+		//ê²Œì‹œíŒ íŒŒì¼ ì—…ë¡œë“œ ê¸°ëŠ¥ ì‹¤í–‰
 		} else if(com.equals("/BBSfileUploadPageAction.do")) {
 			command = new BBSFileUploadCommand();
 			command.execute(request, response);
 			viewPage = "BBSwritePage.jsp";
-		}
+		//ê²Œì‹œíŒ íŒŒì¼ ì—…ë¡œë“œ ìˆ˜ì • ê¸°ëŠ¥ ì‹¤í–‰	
+		} else if(com.equals("/BBSfileUploadPageActionUpdate.do")) {
+			command = new BBSFileUploadCommand();
+			command.execute(request, response);
+			viewPage = "BBSupdatePage.jsp";
+		} 
 		
 		RequestDispatcher rd = request.getRequestDispatcher(viewPage);
 		rd.forward(request, response);
