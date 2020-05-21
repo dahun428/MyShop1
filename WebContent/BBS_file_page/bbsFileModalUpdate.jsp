@@ -4,16 +4,6 @@
 
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-<title>MyShoppingMall</title>
-<link href="css/bootstrap.css" rel="stylesheet">
-<script src="https://kit.fontawesome.com/79413e27e1.js"></script>
-<script src="js/check_js_function.js"></script>
-</head>
 <body>
 	<!-- 파일업로드 Modal -->
 	<div class="modal fade" id="staticBackdrop" data-backdrop="static"
@@ -53,8 +43,5 @@
 
 		</div>
 	</div>
-	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
-	<script src="js/bootstrap.js"></script>
-	<script type="text/javascript" src="js/file_js_function.js"></script>
 </body>
 </html>

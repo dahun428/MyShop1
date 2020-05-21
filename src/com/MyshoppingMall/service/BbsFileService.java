@@ -24,15 +24,9 @@ public class BbsFileService {
 		
 		return fileDao.addBbsFile(file);
 	}
-	public int updateFile(int fileNo) {
-		
-		BbsFile bbsFileCheck = fileDao.getBbsFileByFileNo(fileNo);
-		BbsFile bbsFile = new BbsFile();
-		bbsFile.setFileNo(fileNo);
-		
-		return -1;
+	public void deleteFile(int fileNo) {
+		fileDao.deleteFileByFileNo(fileNo);
 	}
-
 	public BbsFile getBbsFileByFileNo(int fileNo) {
 
 		fileDao = new BbsFileDAO();

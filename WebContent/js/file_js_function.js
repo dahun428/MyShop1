@@ -1,13 +1,31 @@
-//file_name_change_function
-
+/*
+ * file_function
+ */
 $(document).ready(function(){
-	
-	$("#bbs-file-set-now").on('change', function(){
+	$("#bbs-file-set").on('change', function(){
+		var fileName;
 		if(window.FileReader){
-			var fileName = $(this)[0].files[0].name;
+			fileName = $(this)[0].files[0].name;
 		} else {
-			var fileName = $(this).val().split('/').pop().split('\\').pop();
+			fileName = $(this).val().split('/').pop().split('\\').pop();
 		}
-		$("label[for=bbs-file-set]").text(fileName);
+		$("#userfile").val(fileName);
 	});
+	
+	if($('#existFile').length > 0){
+		$("#input-btn").on('click','label', function(){
+			var userfileName = $('#userfile').val();
+			$.ajax({
+				type:'POST',
+				url:'fileDeleteAction',
+				data:{userfileName:userfileName},
+				success:function(result){
+					userfileName=result;
+				},
+				error:function(e){
+
+				}
+			});
+		});
+	}
 });	

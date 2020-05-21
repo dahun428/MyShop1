@@ -2,6 +2,9 @@
     pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 <%@ include file="../session_id/session_check_id.jsp"%>
+<%
+request.setCharacterEncoding("utf-8");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +14,13 @@
 
 <title>MyShoppingMall</title>
 <link href="css/bootstrap.css" rel="stylesheet">
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <script src="https://kit.fontawesome.com/79413e27e1.js"></script>
+<script src="js/bootstrap.js"></script>
+<script type="text/javascript" src="js/file_js_function.js"></script>
+<script type="text/javascript" src="js/check_js_function.js"></script>
 </head>
 <body>
 <header class="header">
@@ -53,9 +62,5 @@
 		</div>
 	</div>
 </header>
-
-
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
-<script src="js/bootstrap.js"></script>
 </body>
 </html>

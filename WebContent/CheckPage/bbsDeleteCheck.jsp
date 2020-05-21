@@ -8,10 +8,6 @@
 
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="utf-8">
-<title>Insert title here</title>
-</head>
 <body>
 	<%@include file="../View_page_file/headerPage.jsp"%>
 	<c:choose>

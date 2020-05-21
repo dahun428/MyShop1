@@ -6,7 +6,6 @@
     pageEncoding="utf-8"%>
 
 <%
-request.setCharacterEncoding("utf-8");
 
 UserDAO userDao = new UserDAO();
 
@@ -27,10 +26,6 @@ if(userId != null){
     
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="utf-8">
-<title>Insert title here</title>
-</head>
 <body>
 <c:choose>
 	<c:when test="${login == UserCheckFunction.NO_EXIST_ID }">

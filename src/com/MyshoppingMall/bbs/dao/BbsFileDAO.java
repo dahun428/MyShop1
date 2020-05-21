@@ -29,7 +29,7 @@ public class BbsFileDAO {
 	public BbsFile recentBbsFileNo() {
 
 		String query = "SELECT BBS_FILE_SEQ.CURRVAL AS FILE_NO FROM DUAL ";
-		
+
 		BbsFile bbsFile = null;
 
 		try {
@@ -38,12 +38,12 @@ public class BbsFileDAO {
 			rs = pstmt.executeQuery();
 
 			if(rs.next()) {
-				
+
 				bbsFile = new BbsFile();
 				bbsFile.setFileNo(rs.getInt("FILE_NO"));
 			}
 			return bbsFile;
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -75,7 +75,7 @@ public class BbsFileDAO {
 			if(rs.next()) {
 				return rs.getInt("FILE_NO");
 			}
-			
+
 			return BBSFileCheckFunction.BBS_FILE_UPLOAD_FAIL;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -189,9 +189,9 @@ public class BbsFileDAO {
 	}
 
 	public int updateFile(BbsFile bbsFile) {
-		
+
 		String query = "UPDATE BBS_FILE SET FILE_NAME = ? , FILE_REAL_NAME = ?, REGISTERED_DATE = sysdate WHERE FILE_NO = ? ";
-		
+
 		try {
 			conn = ConnUtil.getConnection();
 			pstmt = conn.prepareStatement(query);
@@ -199,7 +199,7 @@ public class BbsFileDAO {
 			pstmt.setString(2, bbsFile.getFileRealName());
 			pstmt.setInt(3, bbsFile.getFileNo());
 			pstmt.executeUpdate();
-			
+
 			return BBSFileCheckFunction.BBS_FILE_UPDATE_SUCCESS;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -213,7 +213,33 @@ public class BbsFileDAO {
 				e.printStackTrace();
 			}
 		}
+
+		return BBSFileCheckFunction.BBS_FILE_UPDATE_FAIL;
+	}
+	public int deleteFileByFileNo(int fileNo) {
 		
+		String query = "DELETE FROM BBS_FILE WHERE FILE_NO = ? ";
+
+		try {
+			conn = ConnUtil.getConnection();
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, fileNo);
+			pstmt.executeUpdate();
+
+			return BBSFileCheckFunction.BBS_FILE_UPDATE_SUCCESS;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs != null) rs.close();
+				if(pstmt != null) pstmt.close();
+				if(conn != null) conn.close();
+
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+
 		return BBSFileCheckFunction.BBS_FILE_UPDATE_FAIL;
 	}
 

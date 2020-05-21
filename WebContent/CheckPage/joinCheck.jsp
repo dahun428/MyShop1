@@ -11,10 +11,6 @@ request.setCharacterEncoding("utf-8");
     
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="utf-8">
-<title>Insert title here</title>
-</head>
 <body>
 <c:choose>
 	<c:when test="${userExist == UserCheckFunction.EXIST_USER }">

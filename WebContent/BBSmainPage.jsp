@@ -16,8 +16,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <title>MyShoppingMall</title>
-<link href="css/bootstrap.css" rel="stylesheet">
-<script src="https://kit.fontawesome.com/79413e27e1.js"></script>
 </head>
 <body>
 	<%@include file="../View_page_file/headerPage.jsp"%>
@@ -168,8 +166,5 @@
 		</div>
 	</div>
 	<%@include file="../View_page_file/footerPage.jsp"%>
-
-	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
-	<script src="js/bootstrap.js"></script>
 </body>
 </html>

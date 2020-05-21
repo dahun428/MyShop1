@@ -38,6 +38,8 @@ public class BbsFileUtil {
 		if(uploadFile.exists() && uploadFile.isFile()) {
 			uploadFile.delete();
 		}
+		System.out.println(uploadFileName + "삭제");
+		
 	}
 	public static BbsFile fileUploadExecute(HttpServletRequest request, String directory) {
 
