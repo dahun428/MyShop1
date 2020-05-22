@@ -1,7 +1,7 @@
 <%@page import="java.io.PrintWriter"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -52,7 +52,7 @@
 										</div>
 									</td>
 									<td>
-										<button class="btn btn-dark">중복확인</button>
+										<button class="btn btn-dark"><small>중복확인</small></button>
 									</td>
 								</tr>
 								<tr>
@@ -73,7 +73,7 @@
 
 									</td>
 									<td>
-										<button class="btn btn-dark">비밀번호확인</button>
+										<button class="btn btn-dark"><small>비밀번호확인</small></button>
 									</td>
 								</tr>
 								<tr>
@@ -83,9 +83,9 @@
 												name="userName" maxlength="20" id="userName" />
 										</div>
 										<div class="form-group">
-												<input type="email" class="form-control" placeholder="이메일"
-													name="userEmail" maxlength="20" id="userEmail"/>
-											</div>
+											<input type="email" class="form-control" placeholder="이메일"
+												name="userEmail" maxlength="20" id="userEmail" />
+										</div>
 										<div class="form-group" style="text-align: center;">
 											<div class="btn-group" data-toggle="buttons">
 												<label class="btn btn-dark active"> <input
@@ -95,20 +95,25 @@
 													name="userGender" autocomplete="off" value="여자" />여자
 												</label>
 											</div>
-											
+
+										</div>
+										<div>
+											<input type="checkbox"> <label for=""><small>이용약관
+													및 개인정보 처리 방침에 동의합니다.</small></label>
 										</div>
 									</td>
 								</tr>
-
-
 							</tbody>
 						</table>
-
-
-
 						<input type="button" class="btn btn-dark form-control"
 							value="회원가입" onclick="infoConfirm();" />
 					</form>
+					<div style="margin-top: 1rem;">
+						<small>이미 계정이 있으신가요?</small>
+						<div style="margin-left: 1rem; display: inline-block;">
+							<a href="loginPage.jsp">로그인</a>
+						</div>
+					</div>
 				</div>
 			</div>
 
