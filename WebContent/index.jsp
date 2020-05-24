@@ -14,5 +14,8 @@
 <%@include file="View_page_file/carouselPage_main.jsp" %>
 <%@include file="View_page_file/mainPage.jsp" %>
 <%@include file="View_page_file/footerPage.jsp" %>
+<%
+response.sendRedirect("home.jsp");
+%>
 </body>
 </html>	
