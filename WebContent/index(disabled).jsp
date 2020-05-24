@@ -9,26 +9,10 @@
 
 <title>MyShoppingMall</title>
 <body>
-<div class="wrapper">
-	<div class="header">
 <%@include file="common/headerPage.jsp" %>
-	
-	</div>
-	<div class="navi">
 <%@include file="common/navPage.jsp"  %>
-	
-	</div>
-	<div class="carousel-page">
 <%@include file="common/carouselPage_main.jsp" %>
-	
-	</div>
-	<div class="body">
 <%@include file="common/mainPage.jsp" %>
-	
-	</div>
-	<div class="footer">
 <%@include file="common/footerPage.jsp" %>
-	</div>
-</div>
 </body>
 </html>	
