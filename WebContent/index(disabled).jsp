@@ -9,26 +9,21 @@
 
 <title>MyShoppingMall</title>
 <body>
-<div class="wrapper">
-	<div class="header">
+<<<<<<< HEAD:WebContent/index.jsp
+<%@include file="View_page_file/headerPage.jsp" %>
+<%@include file="View_page_file/navPage.jsp"  %>
+<%@include file="View_page_file/carouselPage_main.jsp" %>
+<%@include file="View_page_file/mainPage.jsp" %>
+<%@include file="View_page_file/footerPage.jsp" %>
+<%
+response.sendRedirect("home.jsp");
+%>
+=======
 <%@include file="common/headerPage.jsp" %>
-	
-	</div>
-	<div class="navi">
 <%@include file="common/navPage.jsp"  %>
-	
-	</div>
-	<div class="carousel-page">
 <%@include file="common/carouselPage_main.jsp" %>
-	
-	</div>
-	<div class="body">
 <%@include file="common/mainPage.jsp" %>
-	
-	</div>
-	<div class="footer">
 <%@include file="common/footerPage.jsp" %>
-	</div>
-</div>
+>>>>>>> d70b27293ced93975df4e899177cc757a5cd25f5:WebContent/index(disabled).jsp
 </body>
 </html>	

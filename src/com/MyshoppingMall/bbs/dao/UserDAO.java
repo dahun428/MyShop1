@@ -45,10 +45,10 @@ public class UserDAO {
 				if(rs.getString("user_password").equals(encryptionPw)) {
 					return LoginCheckFunction.SUCCESS_LOGIN;
 				} else {
-					return LoginCheckFunction.NO_EQUALS_PASSWORD;
+					return LoginCheckFunction.NO_EXIST_ID;
 				}
 			}
-			return LoginCheckFunction.NO_EXIST_ID;
+			return LoginCheckFunction.DATABASE_ERROR;
 
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -144,12 +144,11 @@ public class UserDAO {
 			pstmt.setString(1, userId);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
-				if(rs.getString("user_id").equalsIgnoreCase(userId)) {
+				if(rs.getString("user_id").equals(userId) || rs.getString("user_id") == null) {
 					return JoinCheckFunction.EXIST_USER;
-				}else {
-					return JoinCheckFunction.NON_EXIST_USER;
 				}
 			}
+			return JoinCheckFunction.NON_EXIST_USER;
 			
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -162,7 +161,7 @@ public class UserDAO {
 				e.printStackTrace();
 			}
 		}
-		return JoinCheckFunction.NON_EXIST_USER;
+		return JoinCheckFunction.EXIST_USER;
 	}
 	
 	public void deleteUser(String userId, String userPassword) {
