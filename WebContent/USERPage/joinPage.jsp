@@ -26,8 +26,7 @@
 
 					<div class="col-md-auto">
 						<div class="jumbotron">
-							<form method="post" name="join_form"
-								class="form-horizontal">
+							<form method="post" name="join_form" class="form-horizontal" id="join_form">
 								<table class="table">
 									<thead>
 										<tr>
@@ -39,55 +38,57 @@
 									<tbody>
 										<tr>
 											<td>
-												<div class="form-group" id="join-user-id-div">
+												<div class="form-group">
 													<input type="text" class="form-control" placeholder="아이디"
 														name="join-user-id" maxlength="20" id="join-user-id" />
 												</div>
 											</td>
 											<td>
-												<button type="button" class="btn btn-dark" id="user-duplicate-check" >
+												<button type="button" class="btn btn-dark"
+													id="user-duplicate-check-btn">
 													<small>중복확인</small>
 												</button>
 											</td>
 										</tr>
+										<tr><td><div style="font-size:small; color:#CD1F48;" id="id_check"></div></td></tr>
 										<tr>
 											<td>
 												<div class="form-group">
 													<input type="password" class="form-control"
-														placeholder="비밀번호" name="userPassword" maxlength="20"
+														placeholder="비밀번호" name="join-user-pw" maxlength="20"
 														id="join-user-pw" />
 												</div>
-												<div class="form-group">
+												<div class="form-group" id="join-user-pw-div">
 													<input type="password" class="form-control"
-														placeholder="비밀번호 확인" name="userPassword_chk"
+														placeholder="비밀번호 확인" name="join-user-pw-check"
 														maxlength="20" id="join-user-pw-check" />
 												</div>
-												<div style="text-align: left;" id="join-user-duplicate-check">
-													<label for="user-duplicate-check">사용가능한 비밀번호입니다.</label>
-												</div>
-
 											</td>
 											<td>
-												<button class="btn btn-dark">
+												<button class="btn btn-dark" type="button"
+													id="join-user-pw-check-btn">
 													<small>비밀번호확인</small>
 												</button>
 											</td>
+											
 										</tr>
+										<tr><td><div style="font-size:small; color:#CD1F48;" id="pw_check"></div></td></tr>
 										<tr>
 											<td colspan="2">
 												<div class="form-group">
 													<input type="text" class="form-control" placeholder="이름"
 														name="userName" maxlength="20" id="join-user-name" />
 												</div>
+												<div style="font-size:small;" id="name_check"></div>
 												<div class="form-group">
 													<input type="email" class="form-control" placeholder="이메일"
-														name="join-user-email" maxlength="20" id="userEmail" />
+														name="join-user-email" maxlength="20" id="join-user-email" />
 												</div>
 												<div class="form-group" style="text-align: center;">
 													<div class="btn-group" data-toggle="buttons">
-														<label class="btn btn-dark"> <input
-															type="radio" name="join-user-gender" autocomplete="off"
-															value="남자" checked />남자
+														<label class="btn btn-dark"> <input type="radio"
+															name="join-user-gender" autocomplete="off" value="남자"
+															 />남자
 														</label> <label class="btn btn-dark"> <input type="radio"
 															name="join-user-gender" autocomplete="off" value="여자" />여자
 														</label>
@@ -95,15 +96,17 @@
 
 												</div>
 												<div>
-													<input type="checkbox" name="join-user-agree"> <label for=""><small>이용약관
-															및 개인정보 처리 방침에 동의합니다.</small></label>
+													<input type="checkbox" name="join-user-agree" id="join-user-agree"> <label
+														><small>이용약관 및 개인정보 처리 방침에 동의합니다.</small></label>
 												</div>
+												<div id="submit_check" style="font-size: small; color:#CD1F48;"></div>
 											</td>
 										</tr>
 									</tbody>
 								</table>
-								<button class="btn btn-dark form-control" type="button" id="join-on-btn">회원가입</button>
-							
+								<button class="btn btn-dark form-control" type="button"
+									id="join-on-btn">회원가입</button>
+
 							</form>
 							<div style="margin-top: 1rem;">
 								<small>이미 계정이 있으신가요?</small>
