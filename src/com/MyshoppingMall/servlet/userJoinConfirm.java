@@ -44,11 +44,7 @@ public class userJoinConfirm extends HttpServlet {
 		
 		PrintWriter out = response.getWriter();
 		response.setContentType("application/json");
-		if(isSuccess == UserCheckFunction.NON_EXIST_USER) {
-			
-		} else {
-			isSuccess =  UserCheckFunction.EXIST_USER;
-		}
+		
 		obj.addProperty("isSuccess", isSuccess);
 		String json = gson.toJson(obj);
 		

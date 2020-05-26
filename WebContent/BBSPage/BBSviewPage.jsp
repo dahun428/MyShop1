@@ -92,6 +92,7 @@
 						<button type="button" class="btn btn-primary" data-toggle="modal"
 							data-target="#delete_modal">삭제</button>
 					</c:if>
+					<!-- userRecheck Modal -->
 					<div class="modal fade" id="delete_modal" tabindex="-1"
 						role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 						<div class="modal-dialog">
@@ -111,22 +112,25 @@
 											<input type="text" class="form-control" placeholder="아이디"
 												name="bbs_delete_checkId" maxlength="20" />
 										</div>
+										
 										<div class="form-group">
 											<input type="password" class="form-control"
 												placeholder="비밀번호" name="bbs_delete_check_Pw" maxlength="20" />
 										</div>
+										<div id="user_check"></div>
 									</div>
 									<div class="modal-footer">
 										<input type="hidden" name="bbsId" value="${bbs.bbsId }" />
 										<button type="button" class="btn btn-default"
 											data-dismiss="modal">취소</button>
 										<button type="button" class="btn btn-primary"
-											onclick="infoConfirm();">삭제</button>
+											onclick="infoConfirm();" id="board-delete-btn">삭제</button>
 									</div>
 								</form>
 							</div>
 						</div>
 					</div>
+					<!-- userRecheck Modal end -->
 				</div>
 			</div>
 		</div>

@@ -85,3 +85,35 @@ function bbsInfoConfirm(){
 	
 	document.BBSwriteForm.submit();
 }
+$(document).ready(function(){
+	
+	$('#board-delete-btn').click(function(){
+		
+		$.ajax({
+			type:"POST",
+			dataType:"json",
+			contentType:"application/json; charset=utf-8",
+			url:"BBSDeleteCommand",
+			success:function(result){
+				var userId = JSON.parse(result.userId);
+				var userPassword = JSON.parse(result.userPassword);
+				var isSuccess = result.isSuccess;
+				if(isSuccess === -1){
+					$('#user_check').text("아이디나 비밀번호가 다릅니다.");
+					return;
+				} else if (isSuccess === 1){
+					alert('삭제되었습니다.');
+					location.href='/BBSmainPage.do';
+				} else {
+					alert('실패하였습니다. 관리자에게 문의 해주세요');
+				}
+			}
+			
+			
+		});		
+	});
+	
+});
+
+
+

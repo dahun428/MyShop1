@@ -40,7 +40,7 @@
 											<td>
 												<div class="form-group">
 													<input type="text" class="form-control" placeholder="아이디"
-														name="join-user-id" maxlength="20" id="join-user-id" />
+														name="userId" maxlength="20" id="join-user-id" />
 												</div>
 											</td>
 											<td>
@@ -55,12 +55,12 @@
 											<td>
 												<div class="form-group">
 													<input type="password" class="form-control"
-														placeholder="비밀번호" name="join-user-pw" maxlength="20"
+														placeholder="비밀번호" name="userPassword" maxlength="20"
 														id="join-user-pw" />
 												</div>
 												<div class="form-group" id="join-user-pw-div">
 													<input type="password" class="form-control"
-														placeholder="비밀번호 확인" name="join-user-pw-check"
+														placeholder="비밀번호 확인" name="userPasswordCheck"
 														maxlength="20" id="join-user-pw-check" />
 												</div>
 											</td>
@@ -82,21 +82,21 @@
 												<div style="font-size:small;" id="name_check"></div>
 												<div class="form-group">
 													<input type="email" class="form-control" placeholder="이메일"
-														name="join-user-email" maxlength="20" id="join-user-email" />
+														name="userEmail" maxlength="20" id="join-user-email" />
 												</div>
 												<div class="form-group" style="text-align: center;">
 													<div class="btn-group" data-toggle="buttons">
 														<label class="btn btn-dark"> <input type="radio"
-															name="join-user-gender" autocomplete="off" value="남자"
+															name="userGender" autocomplete="off" value="남자"
 															 />남자
 														</label> <label class="btn btn-dark"> <input type="radio"
-															name="join-user-gender" autocomplete="off" value="여자" />여자
+															name="userGender" autocomplete="off" value="여자" />여자
 														</label>
 													</div>
 
 												</div>
 												<div>
-													<input type="checkbox" name="join-user-agree" id="join-user-agree"> <label
+													<input type="checkbox" name="userAgree" id="join-user-agree"> <label
 														><small>이용약관 및 개인정보 처리 방침에 동의합니다.</small></label>
 												</div>
 												<div id="submit_check" style="font-size: small; color:#CD1F48;"></div>

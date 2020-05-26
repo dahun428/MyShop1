@@ -44,11 +44,9 @@ public class UserDAO {
 			if(rs.next()) {
 				if(rs.getString("user_password").equals(encryptionPw)) {
 					return LoginCheckFunction.SUCCESS_LOGIN;
-				} else {
-					return LoginCheckFunction.NO_EXIST_ID;
 				}
 			}
-			return LoginCheckFunction.DATABASE_ERROR;
+			return LoginCheckFunction.FAIL_LOGIN;
 
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -118,7 +116,7 @@ public class UserDAO {
 			pstmt.setString(3, user.getUserName());
 			pstmt.setString(4, user.getUserGender());
 			pstmt.setString(5, user.getUserEmail());
-			pstmt.executeQuery();
+			pstmt.executeUpdate();
 			
 			return JoinCheckFunction.JOIN_SUCCESS;
 		}catch(Exception e) {
@@ -161,7 +159,7 @@ public class UserDAO {
 				e.printStackTrace();
 			}
 		}
-		return JoinCheckFunction.EXIST_USER;
+		return JoinCheckFunction.DATABASE_ERROR;
 	}
 	
 	public void deleteUser(String userId, String userPassword) {

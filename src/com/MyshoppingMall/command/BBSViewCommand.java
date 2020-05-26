@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.MyshoppingMall.bbs.checkFunction.BBSCheckFunction;
+import com.MyshoppingMall.bbs.checkFunction.BBSFileCheckFunction;
 import com.MyshoppingMall.bbs.dao.BbsDAO;
 import com.MyshoppingMall.bbs.vo.Bbs;
 import com.MyshoppingMall.bbs.vo.BbsFile;
@@ -19,16 +20,19 @@ public class BBSViewCommand implements Bcommand {
 	
 		int bbsId = Integer.parseInt(request.getParameter("bbsId"));
 		Bbs bbs = bbsService.getBbsBybbsId(bbsId);
-		
 		if(bbs == null) {
 			request.setAttribute("isSuccess", BBSCheckFunction.BBS_NO_ARTICLE);
+			return;
 		} else {
-			BbsFile bbsFile = fileService.getBbsFileByFileNo(bbs.getBbsFile().getFileNo());
-			request.setAttribute("bbsFile", bbsFile);
 			request.setAttribute("bbs", bbs);
 		}
-		
-		
+		BbsFile bbsFile = fileService.getBbsFileByFileNo(bbs.getBbsFile().getFileNo());
+		if(bbsFile == null) {
+			request.setAttribute("hasNofile", BBSFileCheckFunction.BBS_FILE_FIND_SUCCESS);
+			return;
+		} else {
+			request.setAttribute("bbsFile", bbsFile);
+		}
 	}
 
 }

@@ -25,8 +25,6 @@
 	src="${pageContext.request.contextPath }/js/file_js_function.js"></script>
 <script type="text/javascript"
 	src="${pageContext.request.contextPath }/js/user_js_function.js"></script>
-	<script type="text/javascript"
-	src="${pageContext.request.contextPath }/js/check_js_function.js"></script>
 </head>
 <body>
 	<%
@@ -102,8 +100,7 @@
 										<div class="modal-footer">
 											<button type="button" class="btn btn-secondary"
 												data-dismiss="modal">취소</button>
-											<button type="button" class="btn btn-primary"
-												id="userLoginBtn">로그인</button>
+											<button type="button" class="btn btn-dark" id="userLoginBtn">로그인</button>
 										</div>
 									</form>
 								</div>
@@ -152,28 +149,28 @@
 												</tr>
 												<tr>
 													<th>주문/배송조회</th>
-													<th><a href="#" class="btn btn-info btn-md"> <i
+													<td><a href="#" class="btn btn-info btn-md"> <i
 															class="fas fa-truck-pickup"></i><span
 															class="badge badge-light" style="margin-left: 0.5rem">4</span>
-													</a></th>
+													</a></td>
 												</tr>
-											</table>
-										</div>
-										<div aria-label="breadcrumb">
-											<ol class="breadcrumb">
-												<li class="breadcrumb-item"><a href="#"><small>회원정보
-															변경</small></a></li>
-												<li class="breadcrumb-item"><a href="#"><small>마이페이지</small></a>
-												</li>
-												<li class="breadcrumb-item"><a href="#"><small>문의하기</small></a>
-												</li>
-											</ol>
+												</table>
+												<div aria-label="breadcrumb">
+													<ol class="breadcrumb">
+														<li class="breadcrumb-item">
+															<a href="#"><small>회원정보 변경</small></a>
+															<a href="#"><small>마이페이지</small></a>
+															<a href="#"><small>문의하기</small></a>
+														</li>
+													</ol>
+												</div>
 										</div>
 									</div>
 									<div class="modal-footer">
 										<button type="button" class="btn btn-secondary"
 											data-dismiss="modal">확인</button>
-										<button type="button" class="btn btn-primary" id="userLogout">로그아웃</button>
+										<button type="button" class="btn btn-primary"
+											id="userLogout">로그아웃</button>
 									</div>
 								</div>
 							</div>

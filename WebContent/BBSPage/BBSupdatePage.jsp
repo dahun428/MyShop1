@@ -1,3 +1,4 @@
+<%@page import="com.MyshoppingMall.bbs.checkFunction.BBSFileCheckFunction"%>
 <%@page import="java.net.URLEncoder"%>
 <%@page import="com.MyshoppingMall.bbs.vo.Bbs"%>
 <%@page import="java.util.List"%>
@@ -82,8 +83,12 @@
 								</tr>
 							</tbody>
 						</table>
-						<input type="hidden" name="bbsId" value="${bbs.bbsId }" /> <input
-							type="hidden" name="fileNo" value="${fileNo }" /> <input
+						<input type="hidden" name="bbsId" value="${bbs.bbsId }" /> 
+						<c:if test="${hasNofile eq BBSFileCheckFunction.BBS_FILE_FIND_SUCCESS}">
+						<input
+							type="hidden" name="fileNo" value="${bbsFile.fileNo }" /> 
+						</c:if>
+						<input
 							type="button" class="btn btn-dark pull-right" value="수정하기"
 							onclick="bbsInfoConfirm();" />
 					</form>

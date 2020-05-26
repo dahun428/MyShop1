@@ -7,7 +7,7 @@ import com.MyshoppingMall.bbs.checkFunction.UserCheckFunction;
 import com.MyshoppingMall.bbs.dao.UserDAO;
 import com.MyshoppingMall.bbs.vo.User;
 
-public class BJoinCommand implements Bcommand{
+public class BJoinCommand_diabled implements Bcommand{
 
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		

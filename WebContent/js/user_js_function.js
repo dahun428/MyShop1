@@ -38,9 +38,9 @@ $(document).ready(function(){
 					history.go(0);
 
 				} else if (result.isSuccess === -1){
-					alert('로그인이 실패하였습니다. 아이디와 비밀번호를 확인해주세요'+result);
+					alert('로그인이 실패하였습니다. 아이디와 비밀번호를 확인해주세요');
 				} else {
-					alert('오류입니다. 관리자에게 문의해주세요'+result);
+					alert('오류입니다. 관리자에게 문의해주세요');
 				}
 			}
 
@@ -69,8 +69,8 @@ $(document).ready(function(){
 	let pw2 = $('#join-user-pw-check');
 	let name = $('#join-user-name');
 	let email = $('#join-user-email');
-	let gender = $('input:radio[name="join-user-gender"]');
-	let agree = $('input:radio[name="join-user-agree"]');
+	let gender = $('input:radio[name="userGender"]');
+	let agree = $('input:radio[name="userAgree"]');
 
 	let pwEaquls = false;
 	let idDupplicate = false;
@@ -170,10 +170,10 @@ $(document).ready(function(){
 		if(name.val().length > 0){
 			nameCheck = true;
 		}
-		if($("input:radio[name=join-user-gender]").is(":checked")){
+		if($("input:radio[name=userGender]").is(":checked")){
 			genderCheck = true;
 		}
-		if($("input:checkbox[name=join-user-agree]").is(":checked")){
+		if($("input:checkbox[name=userAgree]").is(":checked")){
 			agreeCheck = true;
 		}	
 		if(email.val().length > 1){
@@ -217,20 +217,25 @@ $(document).ready(function(){
 			return;
 		}
 		
-		var $form = $('join_form');
+		var $form = $('#join_form');
 		var data = getFormData($form);
-		
+		var jsonData = JSON.stringify(data);
 		
 			$.ajax({
 				type:'POST',
 				dataType:'json',
 				url:'../userJoinRun',
-				data: {jsonData:data},
-				success: function(){
-					
+				data: {jsonData:jsonData},
+				success: function(result){
+					if(result.isSuccess === 1){
+						alert('회원가입이 완료되었습니다.');
+						location.href='../home.jsp';
+					} else {
+						alert('실패하였습니다.');
+					}
 				},
 				error: function(){
-					
+					alert('죄송합니다. 관리자에게 문의해주세요');
 				}
 			});
 			

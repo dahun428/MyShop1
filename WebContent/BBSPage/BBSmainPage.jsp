@@ -60,12 +60,12 @@
 				</div>
 				<div class="row">
 				<!-- write btn -->
-					<div class="col-md-4 pull-md-4-right ml-md-auto">
+					<div class="col-md-4">
 						<a href="./BBSPage/BBSwritePage.jsp" class="btn btn-primary">글쓰기</a>
 					</div>
 					<!-- pagenation -->
-					<div class="col-md-4 ml-md-auto">
-						<ul class="pagination">
+					<div class="col-md-4">
+						<ul class="pagination justify-content-center">
 							<c:if test="${bbsList.hasBbs() }">
 								<c:if test="${bbsList.searchValue != null }">
 
@@ -156,8 +156,8 @@
 						</ul>
 					</div>
 					<!-- searchbar -->
-					<div class="col-md-4 ml-md-auto">
-						<form class="form-inline my-2 my-lg-0" method="get"
+					<div class="col-md-4">
+						<form class="form-inline my-2 my-lg-0 " method="get"
 							name="bbsSearchForm" action="BBSsearch.do">
 							<select class="custom-select my-1 mr-sm-2"
 								id="inlineFormCustomSelectPref" name="searchFilter">
@@ -166,7 +166,7 @@
 								<option value="bbsSearchWriter">작성자</option>
 							</select> <input class="form-control mr-sm-2" type="search"
 								name="searchValue" placeholder="검색어를 입력하세요" aria-label="Search"
-								style="width: 100px;">
+								style="width: 150px;">
 							<button class="btn btn-primary my-2 my-sm-0" type="submit">Search</button>
 						</form>
 					</div>

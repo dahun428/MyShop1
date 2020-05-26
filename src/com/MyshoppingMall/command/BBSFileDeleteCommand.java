@@ -1,4 +1,4 @@
-package com.MyshoppingMall.frontcontroller;
+package com.MyshoppingMall.command;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -7,7 +7,6 @@ import com.MyshoppingMall.bbs.checkFunction.BBSFileCheckFunction;
 import com.MyshoppingMall.bbs.util.BbsFileUtil;
 import com.MyshoppingMall.bbs.util.DirectoryUtil;
 import com.MyshoppingMall.bbs.vo.BbsFile;
-import com.MyshoppingMall.command.Bcommand;
 import com.MyshoppingMall.service.BbsFileService;
 
 

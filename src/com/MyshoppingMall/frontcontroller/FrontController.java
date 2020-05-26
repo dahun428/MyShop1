@@ -16,7 +16,7 @@ import com.MyshoppingMall.command.BBSFileUploadCommand;
 import com.MyshoppingMall.command.BBSUpdateCommand;
 import com.MyshoppingMall.command.BBSWriteCommand;
 import com.MyshoppingMall.command.BBSViewCommand;
-import com.MyshoppingMall.command.BJoinCommand;
+import com.MyshoppingMall.command.BJoinCommand_diabled;
 import com.MyshoppingMall.command.Bcommand;
 import com.MyshoppingMall.command.BLoginCommand;
 
@@ -57,63 +57,63 @@ public class FrontController extends HttpServlet {
 		String conPath = request.getContextPath();
 		String com = url.substring(conPath.length());
 		
-		//로그인 페이지
+		//로그인 페이지(disabled)
 		if(com.equals("/login.do")) {
 			command = new BLoginCommand();
 			command.execute(request, response);
-			viewPage = "/USERPage/loginCheck.jsp";
-		//회원가입 페이지
+			viewPage = conPath+"/loginCheck.jsp";
+		//회원가입 페이지(disabled)
 		} else if (com.equals("/join.do")){
-			command = new BJoinCommand();
+			command = new BJoinCommand_diabled();
 			command.execute(request, response);
-			viewPage = "/USERPage/joinCheck.jsp";
-		//로그아웃 페이지
+			viewPage = conPath+"/joinCheck.jsp";
+		//로그아웃 페이지(disabled)
 		} else if (com.equals("/logout.do")) {
-			viewPage = "/USERPage/logoutCheck.jsp";
+			viewPage = conPath+"/logoutCheck.jsp";
 		//게시판 메인 페이지	
 		} else if (com.equals("/BBSmainPage.do")) {
 			command = new BBSCommand();
 			command.execute(request, response);
-			viewPage = "BBSPage/BBSmainPage.jsp";
+			viewPage = "/BBSPage/BBSmainPage.jsp";
 		//게시판 검색 페이지
 		} else if (com.equals("/BBSsearch.do")) {
 			command = new BBSCommand();
 			command.execute(request, response);
-			viewPage = "BBSPage/BBSmainPage.do";
+			viewPage = "BBSmainPage.do";
 		//게시판 작성 페이지
 		} else if (com.equals("/BBSwrite.do")) {
 			command = new BBSWriteCommand();
 			command.execute(request, response);
-			viewPage = "BBSPage/BBSwriteCheck.jsp";
+			viewPage = "/BBSPage/BBSwriteCheck.jsp";
 		//게시판 자세히 보기 페이지
 		} else if(com.equals("/BBSviewPage.do")) {
 			command = new BBSViewCommand();
 			command.execute(request, response);
-			viewPage = "BBSPage/BBSviewPage.jsp";
+			viewPage = "/BBSPage/BBSviewPage.jsp";
 		//게시판 수정기능 실행
 		} else if(com.equals("/BBSupdatePage.do")) {
 			command = new BBSViewCommand();
 			command.execute(request, response);
-			viewPage = "BBSPage/BBSupdatePage.jsp";
+			viewPage = "/BBSPage/BBSupdatePage.jsp";
 		} else if(com.equals("/BBSupdate.do")) {
 			command = new BBSUpdateCommand();
 			command.execute(request, response);
-			viewPage = "BBSPage/BBSviewPage.do";
+			viewPage = "BBSviewPage.do";
 		//게시판 삭제 기능 실행	
 		} else if(com.equals("/BBSdelete.do")) {
 			command = new BBSDeleteCommand();
 			command.execute(request, response);
-			viewPage = "BBSPage/BBSdeleteCheck.jsp";
+			viewPage = "/BBSPage/BBSdeleteCheck.jsp";
 		//게시판 파일 업로드 기능 실행
 		} else if(com.equals("/BBSfileUploadPageAction.do")) {
 			command = new BBSFileUploadCommand();
 			command.execute(request, response);
-			viewPage = "BBSPage/BBSwritePage.jsp";
+			viewPage = "/BBSPage/BBSwritePage.jsp";
 		//게시판 파일 업로드 수정 기능 실행	
 		} else if(com.equals("/BBSfileUploadPageActionUpdate.do")) {
 			command = new BBSFileUploadCommand();
 			command.execute(request, response);
-			viewPage = "BBSPage/BBSupdatePage.jsp";
+			viewPage = "/BBSPage/BBSupdatePage.jsp";
 		} 
 		
 		RequestDispatcher rd = request.getRequestDispatcher(viewPage);
