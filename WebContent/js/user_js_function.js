@@ -113,7 +113,7 @@ $(document).ready(function(){
 		$.ajax({
 			type:"POST",
 			dataType:"json",
-			url:'../userJoinAction',
+			url:'../userJoinConfirm',
 			data:{jsonId:jsonId},
 			success:function(result){
 				if(result.isSuccess === 1){
@@ -179,52 +179,53 @@ $(document).ready(function(){
 		if(email.val().length > 1){
 			emailCheck = true;
 		}
-		if(!idDupplicate){
+		if(idDupplicate === false){
 			$('#submit_check').text("아이디 중복확인을 해주세요");
 			id.focus();
 			return;
 		}
-		if(!idCheck){
+		if(idCheck  === false){
 			$('#submit_check').text("아이디를 확인 해주세요");
 			id.focus();
 			return;
 		}
-		if(!pwCheck){
+		if(pwCheck  === false){
 			$('#submit_check').text("비밀번호를 확인 해주세요");
 			pw.focus();
 			return;
 		}
-		if(!nameCheck){
+		if(nameCheck === false){
 			$('#submit_check').text("이름을 확인해주세요");
 			name.focus();
 			
 			return;
 		}
-		if(!emailCheck){
+		if(emailCheck === false){
 			$('#submit_check').text("메일을 확인해주세요");
 			email.focus();
 			
 			return;
 		}
-		if(!genderCheck){
+		if(genderCheck === false){
 			$('#submit_check').text("성별란을 확인하세요");
 			gender.focus();
 			return;
 		}
-		if(!agreeCheck){
+		if(agreeCheck === false){
 			$('#submit_check').text("개인정보 제공 동의란을 체크해주세요");
 			agree.focus();
 			return;
 		}
-
-		if(pwEaquls && idDupplicate && idCheck && pwCheck && nameCheck && emailCheck && genderCheck && agreeCheck){
-			
-			var formData = $("form[name=join_form]").serialize();
-			
+		
+		var $form = $('join_form');
+		var data = getFormData($form);
+		
+		
 			$.ajax({
 				type:'POST',
-				url:'userJoinAction2',
-				data: formData,
+				dataType:'json',
+				url:'../userJoinRun',
+				data: {jsonData:data},
 				success: function(){
 					
 				},
@@ -233,7 +234,7 @@ $(document).ready(function(){
 				}
 			});
 			
-		}
+		
 
 	});
 
@@ -252,6 +253,15 @@ $(document).ready(function(){
 		this.css({'border-color':'#FF5675'}).attr('placeholder',str);
 		this.focus();
 	}
+	function getFormData($form){
+		 var unindexed_array = $form.serializeArray();
+		    var indexed_array = {};
 
+		    $.map(unindexed_array, function(n, i){
+		        indexed_array[n['name']] = n['value'];
+		    });
+
+		    return indexed_array;
+	}
 });	
 

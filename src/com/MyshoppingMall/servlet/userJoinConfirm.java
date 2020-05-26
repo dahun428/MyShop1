@@ -19,8 +19,8 @@ import com.google.gson.JsonParser;
 /**
  * Servlet implementation class userJoinAction
  */
-@WebServlet("/userJoinAction")
-public class userJoinAction extends HttpServlet {
+@WebServlet("/userJoinConfirm")
+public class userJoinConfirm extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
   

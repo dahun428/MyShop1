@@ -2,6 +2,7 @@ package com.MyshoppingMall.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,7 +36,7 @@ public class userLoginAction extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 
 		String jsonParam = request.getParameter("json");
-				
+		
 		JsonParser parser = new JsonParser();
 		JsonElement element = parser.parse(jsonParam);
 		String userId = element.getAsJsonObject().get("id").getAsString();
