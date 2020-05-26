@@ -41,7 +41,7 @@ public class BbsService {
 			return new BbsPage(total, pageNum, size, contents);
 	}
 	
-	public int addBbs(String bbsTitle, String bbsContent, String userId, int fileNo) {
+	public int addBbs(String bbsTitle, String bbsContent, String userId) {
 		
 		Bbs bbs = new Bbs();
 		bbs.setBbsTitle(bbsTitle);
@@ -50,10 +50,6 @@ public class BbsService {
 		User user = new User();
 		user.setUserId(userId);
 		bbs.setUser(user);
-		
-		BbsFile bbsFile = new BbsFile();
-		bbsFile.setFileNo(fileNo);
-		bbs.setBbsFile(bbsFile);
 		
 		int isSuccess = bbsDao.addBbs(bbs);
 		

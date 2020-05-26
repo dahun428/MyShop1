@@ -26,7 +26,8 @@ public class BBSViewCommand implements Bcommand {
 		} else {
 			request.setAttribute("bbs", bbs);
 		}
-		BbsFile bbsFile = fileService.getBbsFileByFileNo(bbs.getBbsFile().getFileNo());
+		int fileNo = Integer.parseInt(request.getParameter("fileNo"));
+		BbsFile bbsFile = fileService.getBbsFileByFileNo(fileNo);
 		if(bbsFile == null) {
 			request.setAttribute("hasNofile", BBSFileCheckFunction.BBS_FILE_FIND_SUCCESS);
 			return;

@@ -32,6 +32,11 @@
 					writer.println("history.go(-1);");
 					writer.println("</script>");
 				}
+				int fileNo = 0;
+						if(request.getAttribute("fileNo") != null){
+							fileNo = (int) (request.getAttribute("fileNo"));
+						}
+				
 			%>
 		</div>
 		<div class="navi">
@@ -40,7 +45,7 @@
 		<div class="body">
 			<div class="container">
 				<div style="margin: 3rem;">
-					<form action="BBSwrite.do" method="post" name="BBSwriteForm">
+					<form action="../BBSwrite.do" method="post" name="BBSwriteForm">
 						<table class="table table-stripted"
 							style="text-align: center; border: 1px solid #dddddd;">
 							<thead>
@@ -58,7 +63,8 @@
 								<tr>
 									<td style="text-align: left;"><button type="button"
 											class="btn btn-primary" data-toggle="modal"
-											data-target="#staticBackdrop">파일업로드</button> <c:if
+											data-target="#staticBackdrop">파일업로드</button> 
+										<c:if
 											test="${isSuccess eq BBSFileCheckFunction.BBS_FILE_UPLOAD_SUCCESS}">
 											<%
 												String path = request.getContextPath();
@@ -82,7 +88,8 @@
 								</tr>
 							</tbody>
 						</table>
-						<input type="hidden" name="fileNo" value="${fileNo }" /> <input
+						<input type="hidden" name="fileNo" value="<%=fileNo %>" /> 
+						<input
 							type="button" class="btn btn-dark pull-right" value="글쓰기"
 							onclick="bbsInfoConfirm();" />
 					</form>

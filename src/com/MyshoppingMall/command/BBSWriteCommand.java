@@ -18,11 +18,13 @@ public class BBSWriteCommand implements Bcommand {
 		HttpSession session = request.getSession();
 		
 		String bbsTitle = request.getParameter("bbsTitle");
+		System.out.println(bbsTitle);
 		String bbsContent = request.getParameter("bbsContent");
+		System.out.println(bbsContent);
 		String userId = (String) session.getAttribute("userId");
-		int fileNo = Integer.parseInt(request.getParameter("fileNo"));
+		System.out.println(userId);
 
-		int isSuccess = bbsService.addBbs(bbsTitle, bbsContent, userId, fileNo);
+		int isSuccess = bbsService.addBbs(bbsTitle, bbsContent, userId);
 		
 		if(isSuccess == BBSCheckFunction.BBS_WRITE_SUCCESS) {
 			request.setAttribute("isSuccess", BBSCheckFunction.BBS_WRITE_SUCCESS);

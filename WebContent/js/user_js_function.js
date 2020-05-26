@@ -1,51 +1,17 @@
-//login check function
+
+
 $(document).ready(function(){
-	$('#userId').click(function(){
-		$('#userId').css({'border-color':'#ced4da','background-color':'#fff'});
+	let userId = $('#userId');
+	let userPassword = $('#userPassword');
+	userId.click(function(){
+		userId.change_origin(); 
 	});
-	$('#userPassword').click(function(){
-		$('#userPassword').css({'border-color':'#ced4da','background-color':'#fff'});
+	userPassword.click(function(){
+		userPassword.change_origin();
 	});
-	$('#userLoginBtn').click(function(){		
-
-		var loginForm = $('#userLoginForm');
-		var userId = $('#userId').val();
-		var userPassword = $('#userPassword').val();
-
-		var obj = new Object();
-		obj.id = userId;
-		obj.pw = userPassword;
-		if(obj.id.length == 0){
-			$("#userId").css({'border-color':'#FF5675'})
-			.attr('placeholder','아이디를 입력해주세요').focus();
-			return;
-		}
-		if(obj.pw.length == 0){
-			$("input[name=userPassword]").css({'border-color':'#FF5675'}).attr('placeholder','비밀번호를 입력해주세요');
-			$('#userPassword').focus();
-			return;
-		}
-		var jsonData = JSON.stringify(obj);
-		$.ajax({
-			cache:false,
-			type:"POST",
-			dataType:"json",
-			url:'userLoginAction',
-			data:{json:jsonData},
-			success:function(result){
-				if(result.isSuccess === 1){
-					alert(userId+'님 반갑습니다.');
-					history.go(0);
-
-				} else if (result.isSuccess === -1){
-					alert('로그인이 실패하였습니다. 아이디와 비밀번호를 확인해주세요');
-				} else {
-					alert('오류입니다. 관리자에게 문의해주세요');
-				}
-			}
-
-		});
-	});
+	//로그인 확인 기능
+	$('#userLoginBtn').login_check($('#userLoginForm'),"userLoginAction");
+	//로그아웃 확인 기능  
 	$('#userLogout').click(function(){
 		$.ajax({
 			type:"POST",
@@ -55,13 +21,9 @@ $(document).ready(function(){
 				location.href=result;
 			}
 		});
-	});
-});	
-//JoinPage
-
-
-
-//join check function
+	}); 
+});
+//회원가입 확인 기능
 $(document).ready(function(){
 	let str = "";
 	let id = $('#join-user-id');
@@ -81,8 +43,6 @@ $(document).ready(function(){
 	let genderCheck = false;
 	let agreeCheck = false;
 
-
-
 	let pattern_spc = /[~!@#$%^&*()_+|<>?:{}]/;
 	let pattern_kor = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
 	let pattern_num = /[0-9]/;
@@ -90,10 +50,10 @@ $(document).ready(function(){
 //	아이디 확인 클릭시 이벤트
 	$('#user-duplicate-check-btn').click(function(){
 
-		var idTarget = $("#id_check");
+		let idTarget = $("#id_check");
 
 		if(id.val().length < 1){
-			$.fn.valueChange(id,'아이디를 입력해주세요');
+			id.change_placeholder('아이디를 입력해주세요');
 			return;
 		}
 		if(id.val().length < 4){
@@ -128,20 +88,17 @@ $(document).ready(function(){
 		});	
 
 	});
-
-
-//	비밀번호 버튼 클릭시 이벤트	
-
+//	비밀번호 버튼 클릭시 이벤트
 	$('#join-user-pw-check-btn').click(function(){
 
-		var pwTarget=$('#pw_check');
+		let pwTarget=$('#pw_check');
 
 		if(pw.val().length < 1){
-			$.fn.valueChange(pw,'비밀번호를 입력하세요');
+			pw.change_placeholder(pw,'비밀번호를 입력하세요');
 			return;
 		}
 		if(pw2.val().length < 1){
-			$.fn.valueChange(pw2,'비밀번호를 입력해주세요');
+			pw.change_placeholder(pw2,'비밀번호를 입력해주세요');
 			return;
 		}
 		if(pw.val().length < 4){
@@ -158,12 +115,12 @@ $(document).ready(function(){
 			return;
 		}
 
-	});
-
+	});  
+//	회원가입 폼 전송시 이벤트
 	$('#join-on-btn').click(function(){
 
 
-		var nameTarget = $('#name_check');
+		let nameTarget = $('#name_check');
 		if(email.val() > 0){
 			emailCheck = true;
 		}
@@ -197,13 +154,13 @@ $(document).ready(function(){
 		if(nameCheck === false){
 			$('#submit_check').text("이름을 확인해주세요");
 			name.focus();
-			
+
 			return;
 		}
 		if(emailCheck === false){
 			$('#submit_check').text("메일을 확인해주세요");
 			email.focus();
-			
+
 			return;
 		}
 		if(genderCheck === false){
@@ -216,57 +173,88 @@ $(document).ready(function(){
 			agree.focus();
 			return;
 		}
-		
 		var $form = $('#join_form');
-		var data = getFormData($form);
+		var data = get_form_data($form);
 		var jsonData = JSON.stringify(data);
-		
-			$.ajax({
-				type:'POST',
-				dataType:'json',
-				url:'../userJoinRun',
-				data: {jsonData:jsonData},
-				success: function(result){
-					if(result.isSuccess === 1){
-						alert('회원가입이 완료되었습니다.');
-						location.href='../home.jsp';
-					} else {
-						alert('실패하였습니다.');
-					}
-				},
-				error: function(){
-					alert('죄송합니다. 관리자에게 문의해주세요');
+
+		$.ajax({
+			type:'POST',
+			dataType:'json',
+			url:'../userJoinRun',
+			data: {jsonData:jsonData},
+			success: function(result){
+				if(result.isSuccess === 1){
+					alert('회원가입이 완료되었습니다.');
+					location.href='../home.jsp';
+				} else {
+					alert('실패하였습니다.');
 				}
-			});
-			
-		
-
+			},
+			error: function(){
+				alert('죄송합니다. 관리자에게 문의해주세요');
+			}
+		});
 	});
+});
 
+//로그인, 유저 체크 함수
+$.fn.login_check = function(form,customUrl){
+	this.click(function(){
+		let objArray = get_form_data(form);
+		let userId = objArray.userId;
+		let userPassword = objArray.userPassword;
+		if(userId.length < 1){
+			$("input[name=userId]").change_placeholder('아이디를 입력해주세요');
+			return;
+		}
+		if(userPassword.length < 1){
+			$('input[name=userPassword]').change_placeholder('비밀번호를 입력해주세요');
+			return;
+		}
+		let jsonData = JSON.stringify(objArray);
+		$.ajax({
+			cache:false,
+			type:"POST",
+			dataType:"json",
+			async:false,
+			url: customUrl,
+			data:{jsonData:jsonData},
+			success:function(result){
+				if(result.isSuccess === 1){
+					alert(objArray.userId + "님 반갑습니다.");
+					history.go(0);
+					return;
+				}
+				if(result.isSuccess === -1){
+					alert('아이디와 비밀번호가 다릅니다.');
+					return;
+				}  
+			},
+			error:function(e){
+				alert('오류입니다. 관리자에게 문의해주세요');
+			}
+		});
+	});
+};
 
-//	사용자 함수
-//	input box 바꾸기
-	$.fn.valueChange = function(value, str){
-		value.css({'border-color':'#FF5675'}).attr('placeholder',str);
-		value.focus();
-	}
-//	input box 되돌리기
-	$.fn.valueChangeBack = function(){
-		this.css({'border-color':'#ced4da','background-color':'#fff'});
-	}
-	$.fn.inputValueChange = function(str){
-		this.css({'border-color':'#FF5675'}).attr('placeholder',str);
-		this.focus();
-	}
-	function getFormData($form){
-		 var unindexed_array = $form.serializeArray();
-		    var indexed_array = {};
+//input box 원래대로 되돌리는 함수
+$.fn.change_origin = function(){
+	this.css({'border-color':'#ced4da','background-color':'#fff'});
+	return this;
+}
+//input box placeholder 값 변경함수 해당 dom에 포커스
+$.fn.change_placeholder = function(placeholder){
+	this.css({'border-color':'#FF5675'}).attr('placeholder',placeholder);
+	this.focus();
+}
 
-		    $.map(unindexed_array, function(n, i){
-		        indexed_array[n['name']] = n['value'];
-		    });
-
-		    return indexed_array;
-	}
-});	
+//form에 해당하는 값 입력시 해당값 object배열로 변환
+function get_form_data($form){
+	let unindexed_array = $form.serializeArray();
+	let indexed_array = {};
+	$.map(unindexed_array, function(n, i){
+		indexed_array[n['name']] = n['value'];
+	});
+	return indexed_array;
+}
 

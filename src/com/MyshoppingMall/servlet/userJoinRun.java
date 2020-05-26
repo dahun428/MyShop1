@@ -40,6 +40,8 @@ public class userJoinRun extends HttpServlet {
 		String userName = element.getAsJsonObject().get("userName").getAsString();
 		String userGender =  element.getAsJsonObject().get("userGender").getAsString();
 		String userEmail =  element.getAsJsonObject().get("userEmail").getAsString();
+		
+		System.out.println("userId : "+userId);
 		User user = new User();
 		user.setUserId(userId);
 		user.setUserPassword(userPassword);

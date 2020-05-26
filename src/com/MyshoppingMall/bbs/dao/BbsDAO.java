@@ -118,7 +118,6 @@ public class BbsDAO {
 			pstmt.setString(1, bbs.getBbsTitle());
 			pstmt.setString(2, bbs.getUser().getUserId());
 			pstmt.setString(3, bbs.getBbsContent());
-			pstmt.setInt(4, bbs.getBbsFile().getFileNo());
 			pstmt.executeQuery();
 
 			return BBSCheckFunction.BBS_WRITE_SUCCESS;
@@ -344,11 +343,7 @@ public class BbsDAO {
 		User user = new User();
 		user.setUserId(rs.getString("USER_ID"));
 		bbs.setUser(user);
-		
-		BbsFile bbsFile = new BbsFile();
-		bbsFile.setFileNo(rs.getInt("file_no"));
-		bbs.setBbsFile(bbsFile);
-		
+			
 		bbs.setBbsDate(rs.getString("bbs_date"));
 		bbs.setBbsContent(rs.getString("BBS_CONTENT"));
 		bbs.setBbsAvailable(rs.getInt("BBS_AVAILABLE"));

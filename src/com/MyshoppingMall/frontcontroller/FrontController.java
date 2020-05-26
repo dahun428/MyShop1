@@ -16,7 +16,7 @@ import com.MyshoppingMall.command.BBSFileUploadCommand;
 import com.MyshoppingMall.command.BBSUpdateCommand;
 import com.MyshoppingMall.command.BBSWriteCommand;
 import com.MyshoppingMall.command.BBSViewCommand;
-import com.MyshoppingMall.command.BJoinCommand_diabled;
+import com.MyshoppingMall.command.BJoinCommand;
 import com.MyshoppingMall.command.Bcommand;
 import com.MyshoppingMall.command.BLoginCommand;
 
@@ -61,10 +61,9 @@ public class FrontController extends HttpServlet {
 		if(com.equals("/login.do")) {
 			command = new BLoginCommand();
 			command.execute(request, response);
-			viewPage = conPath+"/loginCheck.jsp";
 		//회원가입 페이지(disabled)
 		} else if (com.equals("/join.do")){
-			command = new BJoinCommand_diabled();
+			command = new BJoinCommand();
 			command.execute(request, response);
 			viewPage = conPath+"/joinCheck.jsp";
 		//로그아웃 페이지(disabled)

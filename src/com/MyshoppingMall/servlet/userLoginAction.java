@@ -34,17 +34,14 @@ public class userLoginAction extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		request.setCharacterEncoding("utf-8");
-
-		String jsonParam = request.getParameter("json");
-		
+		String jsonParam = request.getParameter("jsonData");		
 		JsonParser parser = new JsonParser();
 		JsonElement element = parser.parse(jsonParam);
-		String userId = element.getAsJsonObject().get("id").getAsString();
-		String userPassword = element.getAsJsonObject().get("pw").getAsString();
+		String userId = element.getAsJsonObject().get("userId").getAsString();
+		String userPassword = element.getAsJsonObject().get("userPassword").getAsString();
 
 		UserDAO userDao = UserDAO.getInstance();
 		int isSuccess = userDao.loginUser(userId, userPassword);
-	
 		
 		Gson gson = new Gson();
 		JsonObject obj = new JsonObject();
