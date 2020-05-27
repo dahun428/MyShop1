@@ -9,10 +9,17 @@ public class Bbs {
 	private String bbsDate;
 	private String bbsContent;
 	private int bbsAvailable;
-	
+	private int fileNo;
+
 	public Bbs(){}
 
-	
+	public int getFileNo() {
+		return fileNo;
+	}
+	public void setFileNo(int fileNo) {
+		this.fileNo = fileNo;
+	}
+
 	public void setBbsNo(int bbsNo) {
 		this.bbsNo = bbsNo;
 	}
@@ -49,7 +56,7 @@ public class Bbs {
 	public void setBbsDate(String bbsDate) {
 		this.bbsDate = bbsDate;
 	}
-	
+
 	public String getBbsContent() {
 		return bbsContent;
 	}
@@ -65,8 +72,8 @@ public class Bbs {
 	public void setBbsAvailable(int bbsAvailable) {
 		this.bbsAvailable = bbsAvailable;
 	}
-	
-	
-	
-	
+
+
+
+
 }

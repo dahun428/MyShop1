@@ -93,7 +93,7 @@
 														<li class="breadcrumb-item"><a href="#"><small>아이디찾기</small></a></li>
 														<li class="breadcrumb-item"><a href="#"><small>비밀번호찾기</small></a></li>
 														<li class="breadcrumb-item"><a
-															href="${pageContext.request.contextPath }/USERPage/joinPage.jsp"><small>회원가입</small></a></li>
+															href="USERPage/joinPage.jsp"><small>회원가입</small></a></li>
 													</ol>
 												</div>
 											</div>

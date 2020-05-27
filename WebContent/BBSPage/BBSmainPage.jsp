@@ -61,7 +61,7 @@
 				<div class="row">
 				<!-- write btn -->
 					<div class="col-md-4">
-						<a href="./BBSPage/BBSwritePage.jsp" class="btn btn-primary">글쓰기</a>
+						<a href="BBSPage/BBSwritePage.jsp" class="btn btn-primary">글쓰기</a>
 					</div>
 					<!-- pagenation -->
 					<div class="col-md-4">

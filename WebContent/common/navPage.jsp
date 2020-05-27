@@ -31,7 +31,7 @@
 				<li class="nav-item"><a href="#" class="nav-link">베스트</a></li>
 				<li class="nav-item"><a href="#" class="nav-link">기획전</a></li>
 				<li class="nav-item"><a href="#" class="nav-link">이벤트</a></li>
-				<li class="nav-item"><a href="${pageContext.request.contextPath  }/BBSmainPage.do" class="nav-link">게시판</a>
+				<li class="nav-item"><a href="BBSmainPage.do" class="nav-link">게시판</a>
 				</li>
 			</ul>
 		</div>
