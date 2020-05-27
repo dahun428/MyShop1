@@ -37,7 +37,7 @@
 		</div>
 		<div class="body">
 			<div class="container">
-				<div style="margin: 3rem;">
+				<div style="margin: 3rem;" class="table-responsive">
 					<form action="BBSupdate.do" method="post" name="BBSwriteForm">
 						<table class="table table-stripted"
 							style="text-align: center; border: 1px solid #dddddd;">

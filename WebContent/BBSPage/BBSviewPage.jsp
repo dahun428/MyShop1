@@ -24,13 +24,13 @@
 			<%
 				request.setCharacterEncoding("utf-8");
 
-				if (userId == null) {
-					PrintWriter writer = response.getWriter();
-					writer.println("<script>");
-					writer.println("alert('로그인이 필요한 페이지입니다.');");
-					writer.println("location.href='loginPage.jsp';");
-					writer.println("</script>");
-				}
+			if (userId == null) {
+				PrintWriter writer = response.getWriter();
+				writer.println("<script>");
+				writer.println("alert('로그인이 필요한 페이지입니다.');");
+				writer.println("location.href='BBSmainPage.do';");
+				writer.println("</script>");
+			}
 			%>
 		</div>
 		<div class="navi">
@@ -38,58 +38,100 @@
 		</div>
 		<div class="body">
 			<%@include file="BBSviewCheck.jsp"%>
-			<div class="container">
-				<div style="margin: 3rem;">
+			<div class="container-fluid" style="margin-top: 2rem;">
 
-					
+				<!-- table container-row -->
+				<div class="row">
+					<div class="col-lg-1"></div>
+					<div class="col-lg-10 col-sm-12 col-12">
 
-					<a href="BBSmainPage.do" class="btn btn-primary">목록</a>
-					<c:if test="${userId eq bbs.user.userId }">
-						<a href="BBSupdatePage.do?bbsId=${bbs.bbsId }"
-							class="btn btn-primary">수정</a>
-						<button type="button" class="btn btn-primary" data-toggle="modal"
-							data-target="#delete_modal">삭제</button>
-					</c:if>
-					<!-- userRecheck Modal -->
-					<div class="modal fade" id="delete_modal" tabindex="-1"
-						role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-						<div class="modal-dialog">
-							<div class="modal-content">
-								<div class="modal-header">
-									<h4 class="modal-title" id="myModalLabel">해당 글을 삭제하시겠습니까?</h4>
-									<button type="button" class="close" data-dismiss="modal"
-										aria-label="Close">
-										<span aria-hidden="true">&times;</span>
-									</button>
+						<table class="table table-stripted table-responsive-sm table-responsive-md table-repoinsive-xl">
+							<thead class="table-dark text-center">
+								<tr>
+									<th colspan="4">게시판 글보기</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="text-center">
+									<td colspan="4"><c:out value="${bbs.bbsTitle }" /></td>
+								</tr>
+								<tr class="text-center">
+									<td class="table-borderless">No.</td>
+									<td><c:out value="${bbs.bbsId }" /></td>
+									<td>${bbs.user.userId }</td>
+									<td>${bbs.bbsDate }</td>
+								</tr>
+								<tr class="text-center">
+									<td>파일</td>
+									<td><c:if test="${bbsFile.fileNo ne 0 }">
+											<a href="downloadAction?file=${bbsFile.fileName }"><c:out
+													value="${bbsFile.fileRealName }" /></a>
+										</c:if></td>
+									<td></td>
+									<td></td>
+								</tr>
+								<tr>
+									<td colspan="4" style="padding: 1.33rem;" class="text-break">
+											<c:out value="${bbs.bbsContent }" />
+											</td>
+								</tr>
+								<tr>
+									<td colspan="4"></td>
+								</tr>
+							</tbody>
+						</table>
+
+						<a href="BBSmainPage.do" class="btn btn-primary">목록</a>
+						<c:if test="${userId eq bbs.user.userId }">
+							<a href="BBSupdatePage.do?bbsId=${bbs.bbsId }"
+								class="btn btn-primary">수정</a>
+							<button type="button" class="btn btn-primary" data-toggle="modal"
+								data-target="#delete_modal">삭제</button>
+						</c:if>
+						<!-- userRecheck Modal -->
+						<div class="modal fade" id="delete_modal" tabindex="-1"
+							role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h4 class="modal-title" id="myModalLabel">해당 글을 삭제하시겠습니까?</h4>
+										<button type="button" class="close" data-dismiss="modal"
+											aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<form action="BBSdelete.do" method="post">
+										<div class="jumbotron">
+											<h5 class="" id="myModalLabel">회원정보를 다시 입력해주세요</h5>
+											<br />
+											<div class="form-group">
+												<input type="text" class="form-control" placeholder="아이디"
+													name="bbs_delete_checkId" maxlength="20" />
+											</div>
+
+											<div class="form-group">
+												<input type="password" class="form-control"
+													placeholder="비밀번호" name="bbs_delete_check_Pw"
+													maxlength="20" />
+											</div>
+											<div id="user_check"></div>
+										</div>
+										<div class="modal-footer">
+											<input type="hidden" name="bbsId" value="${bbs.bbsId }" />
+											<button type="button" class="btn btn-default"
+												data-dismiss="modal">취소</button>
+											<button type="button" class="btn btn-primary"
+												onclick="infoConfirm();" id="board-delete-btn">삭제</button>
+										</div>
+									</form>
 								</div>
-								<form action="BBSdelete.do" method="post">
-									<div class="jumbotron">
-										<h5 class="" id="myModalLabel">회원정보를 다시 입력해주세요</h5>
-										<br />
-										<div class="form-group">
-											<input type="text" class="form-control" placeholder="아이디"
-												name="bbs_delete_checkId" maxlength="20" />
-										</div>
-										
-										<div class="form-group">
-											<input type="password" class="form-control"
-												placeholder="비밀번호" name="bbs_delete_check_Pw" maxlength="20" />
-										</div>
-										<div id="user_check"></div>
-									</div>
-									<div class="modal-footer">
-										<input type="hidden" name="bbsId" value="${bbs.bbsId }" />
-										<button type="button" class="btn btn-default"
-											data-dismiss="modal">취소</button>
-										<button type="button" class="btn btn-primary"
-											onclick="infoConfirm();" id="board-delete-btn">삭제</button>
-									</div>
-								</form>
 							</div>
 						</div>
+						<!-- userRecheck Modal end -->
 					</div>
-					<!-- userRecheck Modal end -->
+					<div class="col-lg-1"></div>
 				</div>
+				<!-- table container-row -->
 			</div>
 		</div>
 		<div class="footer">

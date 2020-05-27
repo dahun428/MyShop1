@@ -41,7 +41,7 @@ public class BbsService {
 			return new BbsPage(total, pageNum, size, contents);
 	}
 	
-	public int addBbs(String bbsTitle, String bbsContent, String userId) {
+	public int addBbs(String bbsTitle, String bbsContent, String userId, int fileNo) {
 		
 		Bbs bbs = new Bbs();
 		bbs.setBbsTitle(bbsTitle);
@@ -49,7 +49,8 @@ public class BbsService {
 		
 		User user = new User();
 		user.setUserId(userId);
-		bbs.setUser(user);
+		bbs.setUser(user);		
+		bbs.setFileNo(fileNo);
 		
 		int isSuccess = bbsDao.addBbs(bbs);
 		
@@ -60,9 +61,7 @@ public class BbsService {
 		return BBSCheckFunction.BBS_DATABASE_ERROR;
 	}
 	public Bbs getBbsBybbsId(int bbsId) {
-		
-		Bbs bbs = bbsDao.getBbsBybbsId(bbsId);
-		return bbs;
+		return bbsDao.getBbsBybbsId(bbsId);
 	}
 	
 	

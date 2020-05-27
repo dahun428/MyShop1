@@ -118,6 +118,7 @@ public class BbsDAO {
 			pstmt.setString(1, bbs.getBbsTitle());
 			pstmt.setString(2, bbs.getUser().getUserId());
 			pstmt.setString(3, bbs.getBbsContent());
+			pstmt.setInt(4, bbs.getFileNo());
 			pstmt.executeQuery();
 
 			return BBSCheckFunction.BBS_WRITE_SUCCESS;

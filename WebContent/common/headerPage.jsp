@@ -199,10 +199,10 @@
 				</form>
 			</div>
 			<!-- search bar end -->
-		</div>
-		<!-- navbar end -->
 	</div>
 	<!-- container end -->
+		</div>
+		<!-- navbar end -->
 	<!-- header end -->
 </body>
 </html>

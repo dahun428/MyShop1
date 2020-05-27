@@ -19,6 +19,7 @@ public class BBSViewCommand implements Bcommand {
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 	
 		int bbsId = Integer.parseInt(request.getParameter("bbsId"));
+		System.out.println(bbsId);
 		Bbs bbs = bbsService.getBbsBybbsId(bbsId);
 		if(bbs == null) {
 			request.setAttribute("isSuccess", BBSCheckFunction.BBS_NO_ARTICLE);
@@ -26,14 +27,14 @@ public class BBSViewCommand implements Bcommand {
 		} else {
 			request.setAttribute("bbs", bbs);
 		}
-		int fileNo = Integer.parseInt(request.getParameter("fileNo"));
-		BbsFile bbsFile = fileService.getBbsFileByFileNo(fileNo);
-		if(bbsFile == null) {
-			request.setAttribute("hasNofile", BBSFileCheckFunction.BBS_FILE_FIND_SUCCESS);
-			return;
-		} else {
-			request.setAttribute("bbsFile", bbsFile);
-		}
+//		int fileNo = Integer.parseInt(request.getParameter("fileNo"));
+//		BbsFile bbsFile = fileService.getBbsFileByFileNo(fileNo);
+//		if(bbsFile == null) {
+//			request.setAttribute("hasNofile", BBSFileCheckFunction.BBS_FILE_FIND_SUCCESS);
+//			return;
+//		} else {
+//			request.setAttribute("bbsFile", bbsFile);
+//		}
 	}
 
 }

@@ -83,7 +83,7 @@ public class FrontController extends HttpServlet {
 			command.execute(request, response);
 			viewPage = "BBSmainPage.do";
 		//게시판 작성 페이지
-		} else if (com.equals("/BBSPage/BBSwrite.do")) {
+		} else if (com.equals("/BBSwrite.do")) {
 			command = new BBSWriteCommand();
 			command.execute(request, response);
 			viewPage = "BBSPage/BBSwriteCheck.jsp";
@@ -91,7 +91,7 @@ public class FrontController extends HttpServlet {
 		} else if(com.equals("/BBSviewPage.do")) {
 			command = new BBSViewCommand();
 			command.execute(request, response);
-			viewPage = "BBSviewPage.jsp";
+			viewPage = "BBSPage/BBSviewPage.jsp";
 		//게시판 수정기능 실행
 		} else if(com.equals("/BBSupdatePage.do")) {
 			command = new BBSViewCommand();

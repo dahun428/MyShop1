@@ -26,3 +26,9 @@
 #custom-red{
 	background-color: #e74c3c !important;
 }
+ td div {
+   width: 100px;
+   white-space: nowrap;
+   overflow: hidden;         
+   text-overflow: ellipsis;
+ }

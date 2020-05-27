@@ -25,41 +25,39 @@
 			<%@include file="../common/navPage.jsp"%>
 		</div>
 		<div class="body">
-			<div class="container">
-				<div class="row" style="margin-top: 3rem;">
-					<table class="table table-stripted"
-						style="text-align: center; border: 1px solid #dddddd; margin: 10px;">
-						<thead>
-							<tr>
-								<th style="background-color: #eeeeee; text-align: center;">번호</th>
-								<th style="background-color: #eeeeee; text-align: center;">제목</th>
-								<th style="background-color: #eeeeee; text-align: center;">작성자</th>
-								<th style="background-color: #eeeeee; text-align: center;">작성일</th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:if test="${bbsList.hasNoBbs() }">
-								<tr>
-									<td></td>
-									<td>게시글이 없습니다.</td>
-									<td></td>
-									<td></td>
-								</tr>
+			<div style="margin-top: 2rem;">
+				<!-- table container row -->
 
-							</c:if>
-							<c:forEach items="${bbsList.content }" var="bbs">
-								<tr>
-									<td>${bbs.bbsNo}</td>
-									<td><a href="BBSviewPage.do?bbsId=${bbs.bbsId }">${bbs.bbsTitle }</a></td>
-									<td>${bbs.user.userId }</td>
-									<td>${bbs.bbsDate }</td>
+						<table class="table table-stripted">
+							<thead class="table-dark text-center">
+								<tr class="small">
+									<th>No</th>
+									<th>제목</th>
+									<th>작성자</th>
+									<th>작성일</th>
 								</tr>
-							</c:forEach>
-						</tbody>
-					</table>
-				</div>
+							</thead>
+							<tbody>
+								<c:if test="${bbsList.hasNoBbs() }">
+									<tr class="text-center">
+										<td colspan="4">게시글이 없습니다.</td>
+									</tr>
+								</c:if>
+								<c:forEach items="${bbsList.content }" var="bbs">
+									<tr class="text-sm-center text-truncate">
+										<td>${bbs.bbsNo}</td>
+										<td><div>
+												<a href="BBSviewPage.do?bbsId=${bbs.bbsId }">${bbs.bbsTitle }</a>
+											</div></td>
+										<td>${bbs.user.userId }</td>
+										<td>${bbs.bbsDate }</td>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+				
 				<div class="row">
-				<!-- write btn -->
+					<!-- write btn -->
 					<div class="col-md-4">
 						<a href="BBSPage/BBSwritePage.jsp" class="btn btn-primary">글쓰기</a>
 					</div>

@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import com.MyshoppingMall.bbs.checkFunction.BBSCheckFunction;
 import com.MyshoppingMall.bbs.dao.BbsDAO;
+import com.MyshoppingMall.bbs.util.StringUtil;
 import com.MyshoppingMall.bbs.vo.Bbs;
 import com.MyshoppingMall.bbs.vo.User;
 import com.MyshoppingMall.service.BbsService;
@@ -23,8 +24,9 @@ public class BBSWriteCommand implements Bcommand {
 		System.out.println(bbsContent);
 		String userId = (String) session.getAttribute("userId");
 		System.out.println(userId);
-
-		int isSuccess = bbsService.addBbs(bbsTitle, bbsContent, userId);
+		int fileNo = StringUtil.stringToInt((request.getParameter("fileNo")));
+		
+		int isSuccess = bbsService.addBbs(bbsTitle, bbsContent, userId, fileNo);
 		
 		if(isSuccess == BBSCheckFunction.BBS_WRITE_SUCCESS) {
 			request.setAttribute("isSuccess", BBSCheckFunction.BBS_WRITE_SUCCESS);
