@@ -42,67 +42,64 @@
 			<%@include file="../common/navPage.jsp"%>
 		</div>
 		<div class="body">
-			<div class="container-fluid" style="margin-top: 2rem;">
 
-				<!-- table container-row -->
-				<div class="row">
-					<div class="col-md-1 col-1"></div>
-					<div class="col-md-10 col-10">
+			<!-- table container-row -->
+			<div class="container" style="margin-top: 2rem;">
+				<form action="BBSwrite.do" method="post" name="BBSwriteForm">
+					<table class="table">
+						<thead class="table-dark text-center">
+							<tr>
+								<th colspan="4">게시판 글쓰기 양식</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td><input type="text" class="form-control"
+									placeholder="글제목" name="bbsTitle" maxlength="50" /></td>
+							</tr>
+							<!-- 파일 업로드  -->
+							<tr>
+								<td style="text-align: left;"><button type="button"
+										class="btn btn-primary" data-toggle="modal"
+										data-target="#staticBackdrop" id="user-file-upload-btn">파일업로드</button>
+									<c:choose>
+										<c:when
+											test="${isSuccess eq BBSFileCheckFunction.BBS_FILE_UPLOAD_SUCCESS}">
+											<%
+												String path = request.getContextPath();
+											String fileName = (String) request.getAttribute("bbsFileName");
+											String fileRealName = (String) request.getAttribute("bbsFileRealName");
+											out.write("<a id=\"existFile\" href=\"" + path + "/downloadAction?file=" + URLEncoder.encode(fileRealName, "utf-8")
+													+ "\">" + fileName + "</a>");
+											%>
+											<button id="user-file-delete-btn"
+												class="btn btn-primary float-right" type="button">삭제</button>
+										</c:when>
+									</c:choose></td>
 
-						<form action="BBSwrite.do" method="post" name="BBSwriteForm">
-							<table
-								class="table table-stripted table-responsive-md table-responsive-xl">
-								<thead>
-									<tr class="table-dark text-center">
-										<th colspan="4">게시판 글쓰기 양식</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td><input type="text" class="form-control"
-											placeholder="글제목" name="bbsTitle" maxlength="50" /></td>
-									</tr>
-									<!-- 파일 업로드  -->
-									<tr>
-										<td style="text-align: left;"><button type="button"
-												class="btn btn-primary" data-toggle="modal"
-												data-target="#staticBackdrop">파일업로드</button> <c:if
-												test="${isSuccess eq BBSFileCheckFunction.BBS_FILE_UPLOAD_SUCCESS}">
-												<%
-														String path = request.getContextPath();
-													String fileName = (String) request.getAttribute("bbsFileName");
-													String fileRealName = (String) request.getAttribute("bbsFileRealName");
-													out.write("<a id=\"existFile\" href=\"" + path + "/downloadAction?file=" + URLEncoder.encode(fileName, "utf-8") + "\">"
-															+ fileRealName + "</a>");
-													%>
-											</c:if></td>
-									</tr>
-									<!-- 파일 업로드  end-->
+							</tr>
+							<!-- 파일 업로드  end-->
 
-									<!-- 이미지 업로드 -->
-									<tr>
-										<td style="text-align: left;"><button type="button"
-												class="btn btn-primary" data-toggle="modal"
-												data-target="#staticBackdrop">이미지 업로드</button></td>
-									</tr>
-									<!-- 이미지 업로드  end-->
-									<tr>
-										<td><textarea class="form-control" placeholder="글내용"
-												name="bbsContent" maxlength="2048" style="height: 350px;" /></textarea></td>
-									</tr>
-								</tbody>
-							</table>
-							<input type="hidden" name="fileNo" value="<%=fileNo%>" /> <input
-								type="button" class="btn btn-dark pull-right" value="글쓰기"
-								onclick="bbsInfoConfirm();" />
-						</form>
-
-
-
-					</div>
-					<div class="col-md-1 col-1"></div>
-				</div>
+							<!-- 이미지 업로드 -->
+							<tr>
+								<td style="text-align: left;"><button type="button"
+										class="btn btn-primary" data-toggle="modal"
+										data-target="#staticBackdrop">이미지 업로드</button></td>
+							</tr>
+							<!-- 이미지 업로드  end-->
+							<tr>
+								<td><textarea class="form-control" placeholder="글내용"
+										name="bbsContent" maxlength="2048" style="height: 350px;" /></textarea></td>
+							</tr>
+						</tbody>
+					</table>
+					<input type="hidden" name="fileNo" value="<%=fileNo%>" /> <input
+						type="button" class="btn btn-dark pull-right" value="글쓰기"
+						onclick="bbsInfoConfirm();" />
+				</form>
 			</div>
+
+
 		</div>
 		<div class="footer">
 			<%@include file="../common/footerPage.jsp"%>
@@ -110,5 +107,6 @@
 	</div>
 	<!-- 파일업로드 Modal Page -->
 	<%@include file="BBSfileModal.jsp"%>
+	
 </body>
 </html>

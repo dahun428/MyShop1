@@ -25,7 +25,7 @@
 	src="${pageContext.request.contextPath }/js/file_js_function.js"></script>
 <script type="text/javascript"
 	src="${pageContext.request.contextPath }/js/user_js_function.js"></script>
-	<script type="text/javascript"
+<script type="text/javascript"
 	src="${pageContext.request.contextPath }/js/check_js_function.js"></script>
 </head>
 <body>
@@ -199,10 +199,9 @@
 				</form>
 			</div>
 			<!-- search bar end -->
-	</div>
-	<!-- container end -->
 		</div>
 		<!-- navbar end -->
+	</div>
 	<!-- header end -->
 </body>
 </html>

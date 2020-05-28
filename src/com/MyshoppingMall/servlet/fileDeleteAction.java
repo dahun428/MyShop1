@@ -15,10 +15,12 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.simple.JSONObject;
 
 import com.MyshoppingMall.bbs.checkFunction.BBSFileCheckFunction;
-import com.MyshoppingMall.bbs.util.BbsFileUtil;
+import com.MyshoppingMall.bbs.util.FileUtil;
 import com.MyshoppingMall.bbs.util.DirectoryUtil;
 import com.MyshoppingMall.bbs.vo.BbsFile;
 import com.MyshoppingMall.service.BbsFileService;
+
+import sun.rmi.server.Dispatcher;
 
 /**
  * Servlet implementation class fileDeleteAction
@@ -29,66 +31,34 @@ public class fileDeleteAction extends HttpServlet {
 
 	BbsFileService fileService = new BbsFileService();
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		request.setCharacterEncoding("UTF-8");
-
-
-		String directory = "C:\\Projects\\Jsp\\BBS\\WebContent\\upload";
-		String fileName = request.getParameter("userfileName");
-		BbsFile bbsFile = fileService.getBbsFileByFileName(fileName);
-
-		System.out.println(bbsFile);
-		System.out.println("delete");
-		
-		if(bbsFile == null) {
-			request.setAttribute("isSuccess", BBSFileCheckFunction.BBS_FILE_NO_FIND);
-		} else {	
-			PrintWriter out = null;
-			try {
-				BbsFileUtil.fileDeleteExecute(request, bbsFile, directory);
-				response.setContentType("text/html;charset=utf-8");
-				out = response.getWriter();
-				int isSuccess = BBSFileCheckFunction.BBS_FILE_DELETE_SUCCESS;
-				out.print(isSuccess);
-			} catch (Exception e) {
-				e.printStackTrace();
-				out = response.getWriter();
-				int isSuccess = BBSFileCheckFunction.BBS_FILE_DELETE_FAIL;
-				out.print(isSuccess);
-			} 
-		} 
-
-	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		response.setContentType("text/html;charset=utf-8");
-		
-		String directory = "C:\\Projects\\Jsp\\BBS\\WebContent\\upload";
+
+		String directory = "/upload";
 		String fileName = request.getParameter("userfileName");
 		
 		BbsFile bbsFile = fileService.getBbsFileByFileName(fileName);
 		
 		System.out.println("fileName : "+fileName);
-		PrintWriter out = null;
+		PrintWriter out = response.getWriter();
 		
-		if(bbsFile == null) {
-			out = response.getWriter();
-			int isSuccess = BBSFileCheckFunction.BBS_FILE_DELETE_FAIL;
-			out.print(isSuccess);
-		}else {
-			out = response.getWriter();
+		int isSuccess = 0;
+		
+		try {
 			
-			try {
-				BbsFileUtil.fileDeleteExecute(request, bbsFile, directory);
-				String name = bbsFile.getFileRealName();
-				out.print(name);
-				fileService.deleteFile(bbsFile.getFileNo());
-			} catch(Exception e) {
-				e.printStackTrace();
-			}
+			FileUtil.fileDeleteExecute(request, bbsFile, directory);			
+			fileService.deleteFile(bbsFile.getFileNo());
+			isSuccess = BBSFileCheckFunction.BBS_FILE_DELETE_SUCCESS;
+		} catch (Exception e) {
+			e.printStackTrace();
+			isSuccess = BBSFileCheckFunction.BBS_FILE_DELETE_FAIL;
+		} finally {
+			response.setContentType("text/html;charset=utf-8");
+			out.print(isSuccess);
+			request.setAttribute("isSuccess", isSuccess);
+//			RequestDispatcher dispatcher = request.getRequestDispatcher("BBSPage/BBSwritePage.jsp");
+//			dispatcher.forward(request, response);
 		}
-		
 		
 
 	}

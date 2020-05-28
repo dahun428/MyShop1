@@ -4,7 +4,7 @@
 <html>
 <body>
 <!-- navigation -->
-	<div class="navbar navbar-expand-lg navbar-dark bg-dark">
+	<div class="navbar navbar-expand-sm navbar-dark bg-dark">
 	<!-- toggler start -->
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarSupportedContent"
@@ -31,7 +31,7 @@
 				<li class="nav-item"><a href="#" class="nav-link">베스트</a></li>
 				<li class="nav-item"><a href="#" class="nav-link">기획전</a></li>
 				<li class="nav-item"><a href="#" class="nav-link">이벤트</a></li>
-				<li class="nav-item"><a href="BBSmainPage.do" class="nav-link">게시판</a>
+				<li class="nav-item"><a href="/BBSmainPage.do" class="nav-link">게시판</a>
 				</li>
 			</ul>
 		</div>

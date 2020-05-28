@@ -6,19 +6,12 @@ public class BbsFile {
 
 	private int fileNo;
 	private User user;
-	private Bbs bbs;
 	private String fileName;
 	private String fileRealName;
 	private Date registeredDate;
 	
 	public BbsFile(){}
 
-	public void setBbs(Bbs bbs) {
-		this.bbs = bbs;
-	}
-	public Bbs getBbs() {
-		return bbs;
-	}
 	public String getFileName() {
 		return fileName;
 	}
@@ -61,9 +54,8 @@ public class BbsFile {
 
 	@Override
 	public String toString() {
-		return "BbsFile [fileNo=" + fileNo + ", user=" + user + ", bbs=" + bbs + ", fileName=" + fileName
-				+ ", fileRealName=" + fileRealName + ", registeredDate=" + registeredDate + "]";
+		return "BbsFile [fileNo=" + fileNo + ", user=" + user + ", fileName=" + fileName + ", fileRealName="
+				+ fileRealName + ", registeredDate=" + registeredDate + "]";
 	}
-	
 	
 }

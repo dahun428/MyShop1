@@ -10,7 +10,7 @@
 		data-keyboard="false" tabindex="-1" role="dialog"
 		aria-labelledby="staticBackdropLabel" aria-hidden="true">
 		<div class="modal-dialog">
-			<form action="BBSfileUploadPageAction.do" method="post"
+			<form action="/fileUploadAction" method="post" id="fileUpload-form"
 				enctype="multipart/form-data">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -26,6 +26,9 @@
 							<c:choose>
 								<c:when
 									test="${isSuccess == BBSFileCheckFunction.BBS_FILE_UPLOAD_SUCCESS }">
+									<%
+										request.setAttribute("inValidate", "inValidate");
+									%>
 									<input type="file" id="bbs-file-set"
 										data-class-button="btn btn-default"
 										data-class-input="form-control" data-icon-name="fa fa-upload"
@@ -35,10 +38,10 @@
 									<div class="bootstrap-filestyle input-group">
 										<input type="text" id="userfile" class="form-control"
 											name="userfile" value="${bbsFileName }" readonly="readonly" />
+										<input type="hidden" id="user-file-real-name" value="${bbsFileRealName }" />	
 										<span class="group-span-filestyle input-group-btn"
-											tabindex="0" id="input-btn"> <label for="bbs-file-set"
-											class="btn btn-default"> <span
-												class="glyphicon fa fa-upload"></span>
+											tabindex="0" id="file-input-btn"><label for="bbs-file-set"
+											class="btn btn-default"> <span class="glyphicon fa fa-upload"></span>
 										</label>
 										</span>
 
@@ -53,8 +56,9 @@
 										class="custom-file-input" name="bbs-file" />
 									<div class="bootstrap-filestyle input-group">
 										<input type="text" id="userfile" class="form-control"
-											name="userfile" value="파일을 첨부해주세요" readonly="readonly" /> <span
-											class="group-span-filestyle input-group-btn" tabindex="0">
+											name="userfile" value="파일을 첨부해주세요" readonly="readonly" /> 
+								
+										<span class="group-span-filestyle input-group-btn" tabindex="0">
 											<label for="bbs-file-set" class="btn btn-default"> <span
 												class="glyphicon fa fa-upload"></span>
 										</label>
@@ -67,7 +71,7 @@
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary"
 							data-dismiss="modal">취소</button>
-						<button type="submit" class="btn btn-primary">확인</button>
+						<button id="fileUpload-btn" type="submit" class="btn btn-primary">확인</button>
 					</div>
 				</div>
 			</form>

@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.MyshoppingMall.bbs.checkFunction.BBSFileCheckFunction;
-import com.MyshoppingMall.bbs.util.BbsFileUtil;
+import com.MyshoppingMall.bbs.util.FileUtil;
 import com.MyshoppingMall.bbs.util.DirectoryUtil;
 import com.MyshoppingMall.bbs.vo.BbsFile;
 import com.MyshoppingMall.bbs.vo.User;
@@ -34,25 +34,25 @@ public class BBSFileUploadCommand implements Bcommand{
 			request.setAttribute("isSuccess", BBSFileCheckFunction.BBS_FILE_UPLOAD_FAIL);
 			
 		} else {
-			
-			BbsFile bbsFile = BbsFileUtil.fileUploadExecute(request, directory);
-			
-			User user = new User();
-			user.setUserId(userId);
-			bbsFile.setUser(user);
-			
-			BbsFileService fileService = new BbsFileService();
-			
-			int fileNo = fileService.uploadFile(bbsFile);
-			
-			request.setAttribute("bbsFileName", bbsFile.getFileName());
-			request.setAttribute("bbsFileRealName", bbsFile.getFileRealName());
-			request.setAttribute("fileNo", fileNo);
-			request.setAttribute("isSuccess", BBSFileCheckFunction.BBS_FILE_UPLOAD_SUCCESS);
-			
-			System.out.println(fileNo);
+//			
+////			BbsFile bbsFile = FileUtil.fileUploadExecute(request, directory);
+//			
+//			User user = new User();
+//			user.setUserId(userId);
+//			bbsFile.setUser(user);
+//			
+//			BbsFileService fileService = new BbsFileService();
+//			
+//			int fileNo = fileService.uploadFile(bbsFile);
+//			
+//			request.setAttribute("bbsFileName", bbsFile.getFileName());
+//			request.setAttribute("bbsFileRealName", bbsFile.getFileRealName());
+//			request.setAttribute("fileNo", fileNo);
+//			request.setAttribute("isSuccess", BBSFileCheckFunction.BBS_FILE_UPLOAD_SUCCESS);
+//			System.out.println("업로드");
+//			System.out.println(fileNo);
 		}
-
+		
 
 
 	}

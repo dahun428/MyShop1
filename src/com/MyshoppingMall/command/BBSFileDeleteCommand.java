@@ -4,7 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.MyshoppingMall.bbs.checkFunction.BBSFileCheckFunction;
-import com.MyshoppingMall.bbs.util.BbsFileUtil;
+import com.MyshoppingMall.bbs.util.FileUtil;
 import com.MyshoppingMall.bbs.util.DirectoryUtil;
 import com.MyshoppingMall.bbs.vo.BbsFile;
 import com.MyshoppingMall.service.BbsFileService;
@@ -27,7 +27,7 @@ public class BBSFileDeleteCommand implements Bcommand {
 			request.setAttribute("isSuccess", BBSFileCheckFunction.BBS_FILE_NO_FIND);
 		} else {			
 			try {
-				BbsFileUtil.fileDeleteExecute(request, bbsFile, directory);
+				FileUtil.fileDeleteExecute(request, bbsFile, directory);
 				request.setAttribute("isSuccess", BBSFileCheckFunction.BBS_FILE_DELETE_SUCCESS);
 				
 			} catch (Exception e) {

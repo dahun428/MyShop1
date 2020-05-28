@@ -24,38 +24,36 @@
 		<div class="navi">
 			<%@include file="../common/navPage.jsp"%>
 		</div>
-		<div class="body">
-			<div style="margin-top: 2rem;">
+			<div>
 				<!-- table container row -->
+				<table class="table">
+					<thead class="table-dark text-center">
+						<tr class="small">
+							<th>No</th>
+							<th>제목</th>
+							<th>작성자</th>
+							<th>작성일</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:if test="${bbsList.hasNoBbs() }">
+							<tr class="text-center">
+								<td colspan="4">게시글이 없습니다.</td>
+							</tr>
+						</c:if>
+						<c:forEach items="${bbsList.content }" var="bbs">
+							<tr class="text-sm-center text-truncate">
+								<td>${bbs.bbsNo}</td>
+								<td><div>
+										<a href="BBSviewPage.do?bbsId=${bbs.bbsId }">${bbs.bbsTitle }</a>
+									</div></td>
+								<td>${bbs.user.userId }</td>
+								<td>${bbs.bbsDate }</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
 
-						<table class="table table-stripted">
-							<thead class="table-dark text-center">
-								<tr class="small">
-									<th>No</th>
-									<th>제목</th>
-									<th>작성자</th>
-									<th>작성일</th>
-								</tr>
-							</thead>
-							<tbody>
-								<c:if test="${bbsList.hasNoBbs() }">
-									<tr class="text-center">
-										<td colspan="4">게시글이 없습니다.</td>
-									</tr>
-								</c:if>
-								<c:forEach items="${bbsList.content }" var="bbs">
-									<tr class="text-sm-center text-truncate">
-										<td>${bbs.bbsNo}</td>
-										<td><div>
-												<a href="BBSviewPage.do?bbsId=${bbs.bbsId }">${bbs.bbsTitle }</a>
-											</div></td>
-										<td>${bbs.user.userId }</td>
-										<td>${bbs.bbsDate }</td>
-									</tr>
-								</c:forEach>
-							</tbody>
-						</table>
-				
 				<div class="row">
 					<!-- write btn -->
 					<div class="col-md-4">
@@ -170,11 +168,11 @@
 					</div>
 				</div>
 			</div>
-
+			<!-- table container end -->
 		</div>
+
 		<div class="footer">
 			<%@include file="../common/footerPage.jsp"%>
-		</div>
-	</div>
+		</div>	
 </body>
 </html>

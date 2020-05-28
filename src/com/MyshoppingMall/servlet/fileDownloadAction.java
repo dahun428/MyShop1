@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.MyshoppingMall.bbs.checkFunction.BBSFileCheckFunction;
-import com.MyshoppingMall.bbs.util.BbsFileUtil;
+import com.MyshoppingMall.bbs.util.FileUtil;
 import com.MyshoppingMall.bbs.vo.BbsFile;
 import com.MyshoppingMall.service.BbsFileService;
 
@@ -24,15 +24,18 @@ public class fileDownloadAction extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		String directory = "C:\\Projects\\Jsp\\BBS\\WebContent\\upload";
+		String directory = "/upload";
 		String fileName = request.getParameter("file");
+		System.out.println("downloadAction fileName : " + fileName);
 		BbsFile bbsFile = fileService.getBbsFileByFileName(fileName);
-
+		System.out.println("downloadAction bbsFile : " + bbsFile);
+		
+		
 		if(bbsFile == null) {
 			request.setAttribute("isSuccess", BBSFileCheckFunction.BBS_FILE_NO_FIND);
 		} else {			
 			try {
-				BbsFileUtil.fileDownloadExecute(request, response, bbsFile, directory);
+				FileUtil.fileDownloadExecute(request, response, fileName, directory);
 				request.setAttribute("isSuccess", BBSFileCheckFunction.BBS_FILE_DOWNLOAD_SUCCESS);
 				
 			} catch (Exception e) {

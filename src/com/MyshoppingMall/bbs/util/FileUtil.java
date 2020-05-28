@@ -6,8 +6,10 @@ import java.net.URLEncoder;
 import java.nio.channels.Channels;
 import java.nio.channels.FileChannel;
 import java.nio.channels.WritableByteChannel;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.ServletOutputStream;
@@ -20,7 +22,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import com.MyshoppingMall.bbs.vo.BbsFile;
 
-public class BbsFileUtil {
+public class FileUtil {
 
 	
 	static {
@@ -41,16 +43,16 @@ public class BbsFileUtil {
 		System.out.println(uploadFileName + "삭제");
 		
 	}
-	public static BbsFile fileUploadExecute(HttpServletRequest request, String directory) {
+	public static Map<String, String> fileUploadExecute(HttpServletRequest request, String directory) {
 
 
 		boolean isMultipart = ServletFileUpload.isMultipartContent(request);
 		String fileName = "";
 		String fileRealName = "";
-		BbsFile bbsFile = null;
-
+		String filePathName = "";
+		
 		try {
-			bbsFile = new BbsFile();
+			Map<String, String> fileNameMap = new HashMap<String, String>();
 			if(isMultipart) {
 				DiskFileItemFactory factory = new DiskFileItemFactory();
 				ServletFileUpload upload = new ServletFileUpload(factory);
@@ -66,26 +68,33 @@ public class BbsFileUtil {
 					if(item.isFormField()) {
 
 						fileName = item.getFieldName();
-						fileName = duplicateFile(fileName);
 						fileRealName = new String((item.getString().getBytes("8859_1")),"utf-8");
-						bbsFile.setFileName(fileName);
-						bbsFile.setFileRealName(fileRealName);
+						filePathName = fileRealName;
+					
+						System.out.println("isForm_fileUtil-fileName : " + fileName);
+						System.out.println("isForm_fileUtil-fileRealName : " + fileRealName);
+						System.out.println("isForm_fileUtil-filePathName : " + filePathName);
+						
+						
 					} else {
 
 						fileName = new File(item.getName()).getName();
-						fileName = duplicateFile(fileName);
 						fileRealName = new File(item.getName()).getName();
-						File storeFile = new File(directory + "/" +fileName);
-						bbsFile.setFileName(fileName);
-						bbsFile.setFileRealName(fileRealName);
+						filePathName = duplicateFile(fileRealName);
+						File storeFile = new File(directory + "/" +filePathName);
+						fileNameMap.put("fileName", fileRealName);
+						fileNameMap.put("fileRealName", filePathName);
 						item.write(storeFile);
+						System.out.println("fileUtil-fileName : " + fileName);
+						System.out.println("fileUtil-fileRealName : " + fileRealName);
+						System.out.println("fileUtil-filePathName : " + filePathName);
 						
 					}
 				}
 
 			}
 
-			return bbsFile;
+			return fileNameMap;
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -94,11 +103,8 @@ public class BbsFileUtil {
 		return null;
 	}
 	
-	public static void fileDownloadExecute(HttpServletRequest request, HttpServletResponse response, BbsFile bbsFile, String directory) throws Exception{
+	public static void fileDownloadExecute(HttpServletRequest request, HttpServletResponse response, String fileName, String directory) throws Exception{
 
-		String fileName = bbsFile.getFileName();
-		String fileRealName = bbsFile.getFileRealName();
-		
 		File file = new File(directory + "/" + fileName);
 		
 		String mimeType = request.getSession().getServletContext().getMimeType(file.toString());
@@ -120,7 +126,7 @@ public class BbsFileUtil {
 		WritableByteChannel outputChannel = null;
 		try {
 			
-			downloadFileName = new String(fileRealName.getBytes(), "utf-8");
+			downloadFileName = new String(fileName.getBytes(), "utf-8");
 			
 			if(internetExplorer) {
 				downloadFileName = URLEncoder.encode(fileName, "UTF-8").replaceAll("\\+", "%20");

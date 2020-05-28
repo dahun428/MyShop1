@@ -11,8 +11,8 @@ public class BBSFileCheckFunction {
 	public final static int BBS_FILE_NO_FIND = -2;
 	public final static int BBS_FILE_FIND_SUCCESS = 1;
 	public final static int BBS_FILE_DOWNLOAD_SUCCESS = 1;
-	public final static int BBS_FILE_DELETE_SUCCESS = 1;
-	public final static int BBS_FILE_DELETE_FAIL = -2;
+	public final static int BBS_FILE_DELETE_SUCCESS = -2;
+	public final static int BBS_FILE_DELETE_FAIL = 1;
 	
 	
 }

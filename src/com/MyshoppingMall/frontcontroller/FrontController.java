@@ -116,8 +116,9 @@ public class FrontController extends HttpServlet {
 			command = new BBSFileUploadCommand();
 			command.execute(request, response);
 			viewPage = "BBSPage/BBSupdatePage.jsp";
-		} 
-		
+		} else if (com.equals("/BBSwritePage.do")) {
+			viewPage = "BBSPage/BBSwritePage.jsp";
+		}
 		RequestDispatcher rd = request.getRequestDispatcher(viewPage);
 		rd.forward(request, response);
 		
