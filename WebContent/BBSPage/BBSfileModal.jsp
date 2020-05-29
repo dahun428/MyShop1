@@ -10,7 +10,7 @@
 		data-keyboard="false" tabindex="-1" role="dialog"
 		aria-labelledby="staticBackdropLabel" aria-hidden="true">
 		<div class="modal-dialog">
-			<form action="/fileUploadAction" method="post" id="fileUpload-form"
+			<form action="/BBSfileUpload.do" method="post" id="fileUpload-form"
 				enctype="multipart/form-data">
 				<div class="modal-content">
 					<div class="modal-header">

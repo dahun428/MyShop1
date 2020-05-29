@@ -25,7 +25,7 @@ import com.MyshoppingMall.service.UserService;
  * Servlet implementation class fileUploadAction
  */
 @WebServlet("/fileUploadAction")
-public class fileUploadAction extends HttpServlet {
+public class fileUploadAction_disabled extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

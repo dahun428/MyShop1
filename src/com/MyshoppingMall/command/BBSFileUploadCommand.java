@@ -1,5 +1,8 @@
 package com.MyshoppingMall.command;
 
+import java.util.Map;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -23,37 +26,46 @@ public class BBSFileUploadCommand implements Bcommand{
 
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		
-		String directory = DirectoryUtil.getSQL("fileLoad.directory");
-
+		
+		String directory = "/upload";
 		HttpSession session = request.getSession();
 		String userId = (String) session.getAttribute("userId");
-		
-		UserService userService = new UserService();
-		
-		if(userService.getUserByUserId(userId)) {
-			request.setAttribute("isSuccess", BBSFileCheckFunction.BBS_FILE_UPLOAD_FAIL);
-			
-		} else {
-//			
-////			BbsFile bbsFile = FileUtil.fileUploadExecute(request, directory);
-//			
-//			User user = new User();
-//			user.setUserId(userId);
-//			bbsFile.setUser(user);
-//			
-//			BbsFileService fileService = new BbsFileService();
-//			
-//			int fileNo = fileService.uploadFile(bbsFile);
-//			
-//			request.setAttribute("bbsFileName", bbsFile.getFileName());
-//			request.setAttribute("bbsFileRealName", bbsFile.getFileRealName());
-//			request.setAttribute("fileNo", fileNo);
-//			request.setAttribute("isSuccess", BBSFileCheckFunction.BBS_FILE_UPLOAD_SUCCESS);
-//			System.out.println("업로드");
-//			System.out.println(fileNo);
-		}
-		
+		System.out.println("접속");
+		System.out.println("업로드 위치 :" + directory);
+		System.out.println("userId : "+ userId);
 
+		try {
+			
+			
+			Map<String, String> fileMap = FileUtil.fileUploadExecute(request, directory);
+			
+			String fileName = fileMap.get("fileName");
+			String fileRealName = fileMap.get("fileRealName");
+			System.out.println("fileUploadAction-fileName : "+ fileName );
+			System.out.println("fileUploadAction-fileRealName : "+ fileRealName );
+			
+			
+			BbsFile bbsFile = new BbsFile();
+			bbsFile.setFileName(fileName);
+			bbsFile.setFileRealName(fileRealName);
+			User user = new User();
+			user.setUserId(userId);
+			bbsFile.setUser(user);
+			
+			BbsFileService fileService = new BbsFileService();
+			System.out.println(bbsFile);
+			int fileNo = fileService.uploadFile(bbsFile);
+			
+			request.setAttribute("bbsFileName", bbsFile.getFileName());
+			request.setAttribute("bbsFileRealName", bbsFile.getFileRealName());
+			request.setAttribute("fileNo", fileNo);
+			request.setAttribute("isSuccess", BBSFileCheckFunction.BBS_FILE_UPLOAD_SUCCESS);
+			System.out.println("업로드");
+			System.out.println(fileNo);
+		} catch (Exception e) {
+			request.setAttribute("isSuccess", BBSFileCheckFunction.BBS_FILE_UPLOAD_FAIL);
+			System.out.println("업로드 실패");
+		} 
 
 	}
 

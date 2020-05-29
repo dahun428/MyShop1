@@ -4,7 +4,7 @@
  * @returns
  */
 function infoConfirm(){
-	
+
 	let pattern_spc = /[~!@#$%^&*()_+|<>?:{}]/;
 	let pattern_kor = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
 	let pattern_num = /[0-9]/;
@@ -13,7 +13,7 @@ function infoConfirm(){
 	let userPwCkValue = document.join_form.userPassword_chk.value;
 	let userNameValue = document.join_form.userName.value;
 	let userEmailValue = document.join_form.userEmail.value;
-	
+
 	if(userIdValue.length == 0){
 		alert('아이디를 입력해주세요');
 		join_form.userId.focus();
@@ -61,34 +61,88 @@ function infoConfirm(){
 	}
 	document.join_form.submit();
 }
-function bbsInfoConfirm(){
-	
-	let pattern_spc = /[~!@#$%^&*()_+|<>?:{}]/;
-	let bbsTitleValue = document.BBSwriteForm.bbsTitle.value;
-	let bbsContentValue = document.BBSwriteForm.bbsContent.value;
-	
-	if ( bbsTitleValue.length == 0 || bbsTitleValue.length <= 4 ){
-		alert('제목을 4글자 이상 입력해주세요.');
-		BBSwriteForm.bbsTitle.focus();
-		return;
-	}
-	if ( pattern_spc.test(bbsTitleValue) ){
-		alert('제목에는 특수문자가 포함될 수 없습니다.');
-		BBSwriteForm.bbsTitle.focus();
-		return;
-	}
-	if ( bbsContentValue.length == 0 || bbsContentValue.length <= 10 ){
-		alert('내용을 10글자 이상 입력해주세요.');
-		BBSwriteForm.bbsContent.focus();
-		return;
-	}
-	
-	document.BBSwriteForm.submit();
-}
+//게시판 글 확인
+
 $(document).ready(function(){
+
+	$('#bbs-write-btn').bbs_add_function($('#BBSwriteForm'),'/BBSwrite.do');
 	
-	$('#board-delete-btn').click(function(){
+});
+
+$.fn.bbs_add_function = function(form,customUrl){
+	
+	this.click(function(){
+		let pattern_spc = /[~!@#$%^&*()_+|<>?:{}]/;		
+		let objArray = get_form_data(form);
+		let bbsTitle = objArray.bbsTitle;
 		
+		let bbsContennt = objArray.bbsContent;
+		let bbsTitleValue = document.BBSwriteForm.bbsTitle.value;
+		let bbsContentValue = document.BBSwriteForm.bbsContent.value;
+		let fileNo = objArray.fileNo;
+
+		if ( bbsTitleValue.length == 0 || bbsTitleValue.length <= 4 ){
+			alert('제목을 4글자 이상 입력해주세요.');
+			BBSwriteForm.bbsTitle.focus();
+			return;
+		}
+		if ( pattern_spc.test(bbsTitleValue) ){
+			alert('제목에는 특수문자가 포함될 수 없습니다.');
+			BBSwriteForm.bbsTitle.focus();
+			return;
+		}
+		if ( bbsContentValue.length == 0 || bbsContentValue.length <= 10 ){
+			alert('내용을 10글자 이상 입력해주세요.');
+			BBSwriteForm.bbsContent.focus();
+			return;
+		}
+
+		let jsonData = JSON.stringify(objArray);
+		$.ajax({
+			type:"POST",
+			dataType:"json",
+			url: customUrl,
+			data:{jsonData:jsonData},
+			success:function(result){
+				console.log(result);
+				location.href='BBSviewPage.do?bbsId='+result;
+					
+			},
+			error:function(e){
+				alert('오류입니다. 관리자에게 문의해주세요');
+			}
+		});
+	});
+}
+
+//function bbsInfoConfirm(){
+
+//let pattern_spc = /[~!@#$%^&*()_+|<>?:{}]/;
+//let bbsTitleValue = document.BBSwriteForm.bbsTitle.value;
+//let bbsContentValue = document.BBSwriteForm.bbsContent.value;
+
+//if ( bbsTitleValue.length == 0 || bbsTitleValue.length <= 4 ){
+//alert('제목을 4글자 이상 입력해주세요.');
+//BBSwriteForm.bbsTitle.focus();
+//return;
+//}
+//if ( pattern_spc.test(bbsTitleValue) ){
+//alert('제목에는 특수문자가 포함될 수 없습니다.');
+//BBSwriteForm.bbsTitle.focus();
+//return;
+//}
+//if ( bbsContentValue.length == 0 || bbsContentValue.length <= 10 ){
+//alert('내용을 10글자 이상 입력해주세요.');
+//BBSwriteForm.bbsContent.focus();
+//return;
+//}
+
+//document.BBSwriteForm.submit();
+//}
+$(document).ready(function(){
+
+	$('#board-delete-btn').click(function(){
+
 		$.ajax({
 			type:"POST",
 			dataType:"json",
@@ -108,12 +162,20 @@ $(document).ready(function(){
 					alert('실패하였습니다. 관리자에게 문의 해주세요');
 				}
 			}
-			
-			
+
+
 		});		
 	});
-	
+
 });
 
-
+//form에 해당하는 값 입력시 해당값 object배열로 변환
+function get_form_data($form){
+	let unindexed_array = $form.serializeArray();
+	let indexed_array = {};
+	$.map(unindexed_array, function(n, i){
+		indexed_array[n['name']] = n['value'];
+	});
+	return indexed_array;
+}
 

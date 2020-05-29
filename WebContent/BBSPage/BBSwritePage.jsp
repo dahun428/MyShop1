@@ -45,7 +45,7 @@
 
 			<!-- table container-row -->
 			<div class="container" style="margin-top: 2rem;">
-				<form action="BBSwrite.do" method="post" name="BBSwriteForm">
+				<form action="/BBSwrite.do" method="post" name="BBSwriteForm" id="BBSwriteForm">
 					<table class="table">
 						<thead class="table-dark text-center">
 							<tr>
@@ -94,8 +94,8 @@
 						</tbody>
 					</table>
 					<input type="hidden" name="fileNo" value="<%=fileNo%>" /> <input
-						type="button" class="btn btn-dark pull-right" value="글쓰기"
-						onclick="bbsInfoConfirm();" />
+						type="button" class="btn btn-dark pull-right" id="bbs-write-btn" value="글쓰기"
+						/>
 				</form>
 			</div>
 

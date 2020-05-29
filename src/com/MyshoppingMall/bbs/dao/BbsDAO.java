@@ -111,6 +111,7 @@ public class BbsDAO {
 	public int addBbs(Bbs bbs) {
 
 		String query = QueryUtil.getSQL("BBS.addBbs");
+		String query1 =  QueryUtil.getSQL("BBS.addBbsGetBbsId");
 		try {
 
 			conn = ConnUtil.getConnection();
@@ -120,8 +121,14 @@ public class BbsDAO {
 			pstmt.setString(3, bbs.getBbsContent());
 			pstmt.setInt(4, bbs.getFileNo());
 			pstmt.executeQuery();
+			pstmt = conn.prepareStatement(query1);
+			rs = pstmt.executeQuery();
 
-			return BBSCheckFunction.BBS_WRITE_SUCCESS;
+			if(rs.next()) {
+				return rs.getInt("bbs_id");
+			}
+			
+			return BBSCheckFunction.BBS_WRITE_FAIL;
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {

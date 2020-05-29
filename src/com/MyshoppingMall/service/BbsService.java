@@ -52,13 +52,8 @@ public class BbsService {
 		bbs.setUser(user);		
 		bbs.setFileNo(fileNo);
 		
-		int isSuccess = bbsDao.addBbs(bbs);
+		return bbsDao.addBbs(bbs);
 		
-		if(isSuccess ==  BBSCheckFunction.BBS_WRITE_SUCCESS) {
-			return  BBSCheckFunction.BBS_WRITE_SUCCESS;
-		}
-		
-		return BBSCheckFunction.BBS_DATABASE_ERROR;
 	}
 	public Bbs getBbsBybbsId(int bbsId) {
 		return bbsDao.getBbsBybbsId(bbsId);
