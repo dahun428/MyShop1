@@ -12,7 +12,9 @@ import com.MyshoppingMall.bbs.util.StringUtil;
 import com.MyshoppingMall.bbs.vo.Bbs;
 import com.MyshoppingMall.bbs.vo.User;
 import com.MyshoppingMall.service.BbsService;
+import com.google.gson.Gson;
 import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 public class BBSWriteCommand implements Bcommand {
@@ -38,6 +40,12 @@ public class BBSWriteCommand implements Bcommand {
 			System.out.println("userId : " + userId);
 			int bbsId = bbsService.addBbs(bbsTitle, bbsContent, userId, fileNo);
 			System.out.println("bbsId " + bbsId);
+			
+			
+			Gson gson = new Gson();
+			JsonObject obj = new JsonObject();
+			obj.addProperty("bbsId", bbsId);
+			String json = gson.toJson(obj);
 			PrintWriter out = response.getWriter();
 			out.print(bbsId);
 			
