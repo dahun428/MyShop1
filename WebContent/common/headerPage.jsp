@@ -26,7 +26,7 @@
 <script type="text/javascript"
 	src="${pageContext.request.contextPath }/js/user_js_function.js"></script>
 <script type="text/javascript"
-	src="${pageContext.request.contextPath }/js/check_js_function.js"></script>
+	src="${pageContext.request.contextPath }/js/bbs_js_function.js"></script>
 </head>
 <body>
 	<%
@@ -87,7 +87,6 @@
 														placeholder="비밀번호" name="userPassword" maxlength="20"
 														id="userPassword" />
 												</div>
-
 												<div aria-label="breadcrumb">
 													<ol class="breadcrumb">
 														<li class="breadcrumb-item"><a href="#"><small>아이디찾기</small></a></li>

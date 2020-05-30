@@ -65,35 +65,34 @@ function infoConfirm(){
 
 $(document).ready(function(){
 
-	$('#bbs-write-btn').bbs_add_function($('#BBSwriteForm'),'/BBSwrite.do');
-	
+	$('#bbs-write-btn').bbs_add_function($('#BBSwriteForm'));
+	$('#bbs-update-btn').bbs_add_function($('#BBSupdateForm'));
 });
 
-$.fn.bbs_add_function = function(form,customUrl){
+$.fn.bbs_add_function = function(form){
 	
 	this.click(function(){
 		let pattern_spc = /[~!@#$%^&*()_+|<>?:{}]/;		
 		let objArray = get_form_data(form);
 		let bbsTitle = objArray.bbsTitle;
-		
 		let bbsContennt = objArray.bbsContent;
-		let bbsTitleValue = document.BBSwriteForm.bbsTitle.value;
-		let bbsContentValue = document.BBSwriteForm.bbsContent.value;
+		let bbsTitleValue = $('input[name=bbsTitle]').val();
+		let bbsContentValue =  $('#bbsContent').val();
 		let fileNo = objArray.fileNo;
 
 		if ( bbsTitleValue.length == 0 || bbsTitleValue.length <= 4 ){
 			alert('제목을 4글자 이상 입력해주세요.');
-			BBSwriteForm.bbsTitle.focus();
+			bbsTitle.focus();
 			return;
 		}
 		if ( pattern_spc.test(bbsTitleValue) ){
 			alert('제목에는 특수문자가 포함될 수 없습니다.');
-			BBSwriteForm.bbsTitle.focus();
+			bbsTitle.focus();
 			return;
 		}
 		if ( bbsContentValue.length == 0 || bbsContentValue.length <= 10 ){
 			alert('내용을 10글자 이상 입력해주세요.');
-			BBSwriteForm.bbsContent.focus();
+			bbsContent.focus();
 			return;
 		}
 		form.submit();

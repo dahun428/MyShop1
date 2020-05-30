@@ -24,8 +24,8 @@ public class BbsFileService {
 		
 		return fileDao.addBbsFile(file);
 	}
-	public void deleteFile(int fileNo) {
-		fileDao.deleteFileByFileNo(fileNo);
+	public void deleteFile(BbsFile bbsFile) {
+		fileDao.deleteFileByFileNo(bbsFile);
 	}
 	public BbsFile getBbsFileByFileNo(int fileNo) {
 

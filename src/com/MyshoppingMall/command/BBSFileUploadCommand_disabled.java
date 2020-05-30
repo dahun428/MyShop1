@@ -22,7 +22,7 @@ import com.MyshoppingMall.service.UserService;
  * @author JHTA
  *
  */
-public class BBSFileUploadCommand implements Bcommand{
+public class BBSFileUploadCommand_disabled implements Bcommand{
 
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		

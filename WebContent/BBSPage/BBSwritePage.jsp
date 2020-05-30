@@ -32,10 +32,6 @@
 				writer.println("history.go(-1);");
 				writer.println("</script>");
 			}
-			int fileNo = 0;
-			if (request.getAttribute("fileNo") != null) {
-				fileNo = (int) (request.getAttribute("fileNo"));
-			}
 			%>
 		</div>
 		<div class="navi">
@@ -76,11 +72,11 @@
 							<!-- 이미지 업로드  end-->
 							<tr>
 								<td><textarea class="form-control" placeholder="글내용"
-										name="bbsContent" maxlength="2048" style="height: 350px;" /></textarea></td>
+									id="bbsContent"	name="bbsContent" maxlength="2048" style="height: 350px;" /></textarea></td>
 							</tr>
 						</tbody>
 					</table>
-					<input type="hidden" name="fileNo" value="<%=fileNo%>" /> <input
+					<input id="write-page-file-no" type="hidden" name="fileNo" value="0" /> <input
 						type="button" class="btn btn-dark pull-right" id="bbs-write-btn"
 						value="글쓰기" />
 				</form>

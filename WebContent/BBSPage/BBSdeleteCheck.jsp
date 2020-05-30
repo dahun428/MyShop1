@@ -8,6 +8,7 @@
 <!DOCTYPE html>
 <html>
 <body>
+<%@ include file="/BBSPage/BBSmainPage.jsp" %>
 	<c:choose>
 		<c:when test="${isSuccess eq  UserCheckFunction.NO_EXIST_ID}">
 			<script>

@@ -16,7 +16,7 @@ $(document).ready(function(){
 			 $('#user-file-upload-btn').attr('class','btn btn-primary')
 			  						   .text('파일업로드')
 			  						   .val('upload');
-			 let userfileName = 
+			 $('#write-page-file-no').val("0");
 			 $.ajax({
 					type:'POST',
 					url:'../fileDeleteAction',
@@ -63,7 +63,7 @@ $(document).ready(function(){
 		            $('#user-file-upload-btn').attr('class','btn btn-dark')
 		            						  .text('파일삭제')
 		            						  .val('exist-file');
-		            						 
+		            $('#write-page-file-no').val(fileNo);
 			 },
 		        error: function (e) {
 		            console.log("ERROR : ", e);

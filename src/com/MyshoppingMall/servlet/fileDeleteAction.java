@@ -46,8 +46,8 @@ public class fileDeleteAction extends HttpServlet {
 		
 		try {
 			
-			FileUtil.fileDeleteExecute(request, bbsFile, directory);			
-			fileService.deleteFile(bbsFile.getFileNo());
+			FileUtil.fileDeleteExecute(request, bbsFile.getFileName(), directory);			
+			fileService.deleteFile(bbsFile);
 			isSuccess = BBSFileCheckFunction.BBS_FILE_DELETE_SUCCESS;
 		} catch (Exception e) {
 			e.printStackTrace();

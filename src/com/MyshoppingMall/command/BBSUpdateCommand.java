@@ -10,28 +10,22 @@ import com.MyshoppingMall.bbs.vo.Bbs;
 public class BBSUpdateCommand implements Bcommand {
 
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
-
+		
 		String bbsTitle = request.getParameter("bbsTitle");
 		String bbsContent = request.getParameter("bbsContent");
+		int fileNo = Integer.parseInt(request.getParameter("fileNo"));
+		System.out.println("update filenO : " + fileNo);
 		int bbsId = Integer.parseInt(request.getParameter("bbsId"));
 		
 		BbsDAO bbsDao = new BbsDAO();
 		Bbs bbs = bbsDao.getBbsBybbsId(bbsId);
-		if(bbs == null) {
-			request.setAttribute("isSuccess", BBSCheckFunction.BBS_DATABASE_ERROR);
-		}
-		
 		
 		bbs.setBbsTitle(bbsTitle);
 		bbs.setBbsContent(bbsContent);
-		int isSuccess = bbsDao.updateBbs(bbs);
+		bbs.setFileNo(fileNo);
+		bbsDao.updateBbs(bbs);
+		request.setAttribute("bbsId", bbsId);
 		
-		if(isSuccess == BBSCheckFunction.BBS_WRITE_SUCCESS) {
-			request.setAttribute("isSuccess", BBSCheckFunction.BBS_WRITE_SUCCESS);
-			request.setAttribute("bbs", bbs);
-		} else {
-			request.setAttribute("isSuccess", BBSCheckFunction.BBS_WRITE_FAIL);
-		}
 	}
 
 }

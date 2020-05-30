@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.MyshoppingMall.command.BBSCommand;
 import com.MyshoppingMall.command.BBSDeleteCommand;
 import com.MyshoppingMall.command.BBSFileDownloadCommand;
-import com.MyshoppingMall.command.BBSFileUploadCommand;
+import com.MyshoppingMall.command.BBSFileUploadCommand_disabled;
 import com.MyshoppingMall.command.BBSUpdateCommand;
 import com.MyshoppingMall.command.BBSWriteCommand;
 import com.MyshoppingMall.command.BBSViewCommand;
@@ -88,7 +88,6 @@ public class FrontController extends HttpServlet {
 			command.execute(request, response);
 			int bbsId = (int) request.getAttribute("bbsId");
 			viewPage = "BBSviewPage.do?bbsId="+bbsId;
-			//viewPage = "BBSmainPage.do";
 		//게시판 자세히 보기 페이지
 		} else if(com.equals("/BBSviewPage.do")) {
 			command = new BBSViewCommand();
@@ -102,16 +101,16 @@ public class FrontController extends HttpServlet {
 		} else if(com.equals("/BBSupdate.do")) {
 			command = new BBSUpdateCommand();
 			command.execute(request, response);
-			viewPage = "BBSviewPage.do";
+			int bbsId = (int) request.getAttribute("bbsId");
+			viewPage = "BBSviewPage.do?bbsId="+bbsId;
 		//게시판 삭제 기능 실행	
 		} else if(com.equals("/BBSdelete.do")) {
 			command = new BBSDeleteCommand();
 			command.execute(request, response);
-			viewPage = "BBSPage/BBSdeleteCheck.jsp";
 		//게시판 파일 업로드 기능 실행
 			
 			
-//		} else if(com.equals("/BBSfileUpload.do")) {
+//		} else xx`if(com.equals("/BBSfileUpload.do")) {
 //			command = new BBSFileUploadCommand();
 //			command.execute(request, response);
 //			viewPage = "BBSPage/BBSwritePage.jsp";

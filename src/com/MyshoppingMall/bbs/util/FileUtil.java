@@ -31,9 +31,8 @@ public class FileUtil {
 
 	}
 
-	public static void fileDeleteExecute(HttpServletRequest request, BbsFile bbsFile, String directory) {
+	public static void fileDeleteExecute(HttpServletRequest request, String fileName, String directory) {
 		
-		String fileName = bbsFile.getFileName();
 		String uploadFileName = (directory + "/" + fileName);
 		
 		File uploadFile = new File(uploadFileName);

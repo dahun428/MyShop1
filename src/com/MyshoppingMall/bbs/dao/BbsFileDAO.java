@@ -216,14 +216,17 @@ public class BbsFileDAO {
 
 		return BBSFileCheckFunction.BBS_FILE_UPDATE_FAIL;
 	}
-	public int deleteFileByFileNo(int fileNo) {
+	public int deleteFileByFileNo(BbsFile bbsFile) {
 		
-		String query = "DELETE FROM BBS_FILE WHERE FILE_NO = ? ";
+		String query = "update bbs_file set file_name = ? , file_real_name = ? ,"
+							+ "registered_date = sysdate where file_no = ? ";
 
 		try {
 			conn = ConnUtil.getConnection();
 			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, fileNo);
+			pstmt.setString(1, bbsFile.getFileName());
+			pstmt.setString(2, bbsFile.getFileRealName());
+			pstmt.setInt(3, bbsFile.getFileNo());
 			pstmt.executeUpdate();
 
 			return BBSFileCheckFunction.BBS_FILE_UPDATE_SUCCESS;

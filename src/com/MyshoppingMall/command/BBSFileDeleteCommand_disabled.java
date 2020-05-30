@@ -10,7 +10,7 @@ import com.MyshoppingMall.bbs.vo.BbsFile;
 import com.MyshoppingMall.service.BbsFileService;
 
 
-public class BBSFileDeleteCommand implements Bcommand {
+public class BBSFileDeleteCommand_disabled implements Bcommand {
 
 	BbsFileService fileService = new BbsFileService();
 	/**

@@ -1,12 +1,8 @@
 package com.MyshoppingMall.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Iterator;
 import java.util.Map;
-import java.util.Set;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,25 +10,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.MyshoppingMall.bbs.checkFunction.BBSFileCheckFunction;
 import com.MyshoppingMall.bbs.util.FileUtil;
-import com.MyshoppingMall.bbs.util.DirectoryUtil;
 import com.MyshoppingMall.bbs.vo.BbsFile;
 import com.MyshoppingMall.bbs.vo.User;
 import com.MyshoppingMall.service.BbsFileService;
-import com.MyshoppingMall.service.UserService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 
 /**
  * Servlet implementation class fileUploadAction
  */
 @WebServlet("/fileUploadAction")
-public class fileUploadAction_disabled extends HttpServlet {
+public class fileUploadAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

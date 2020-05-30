@@ -39,7 +39,7 @@
 		<div class="body">
 			<div class="container" style="margin-top: 2rem;">
 
-				<form action="BBSupdate.do" method="post" name="BBSwriteForm">
+				<form method="post" id="BBSupdateForm" name="BBSupdateForm" action="BBSupdate.do">
 					<table class="table">
 						<thead class="table-dark text-center">
 							<tr>
@@ -53,22 +53,26 @@
 							</tr>
 							<!-- 파일 업로드  -->
 							<tr>
-								<td style="text-align: left;"><button type="button"
-										class="btn btn-primary" data-toggle="modal"
-										data-target="#staticBackdrop">파일업로드</button> <c:choose>
-										<c:when
-											test="${bbs.fileNo ne 0 }">
-											<c:set value="${bbsFile }" var="bbsFile"/>
-											<c:set value="${bbsFile.fileName }" var="fileName"/>
-											<c:set value="${bbsFile.fileRealName }" var="fileRealName"/>
-											<a id="existFile" href="downloadAction?file=${bbsFile.fileRealName }"><c:out
-													value="${bbsFile.fileName }" /></a>
-											<button id="user-file-delete-btn"
-												class="btn btn-primary float-right" type="button">삭제</button>
-										</c:when>
-									</c:choose></td>
+								<c:choose>
+									<c:when test="${bbsFile ne null }">
+										<td style="text-align: left;"><button type="button"
+												class="btn btn-dark" data-toggle="modal"
+												data-target="#staticBackdrop" id="user-file-upload-btn"
+												value="exist-file">파일삭제</button> <span id="file-upload-preview">
+												<a id="existFile"
+												href="../downloadAction?file=${bbsFile.fileRealName }">
+													${bbsFile.fileName } </a>
+										</span></td>
+									</c:when>
+									<c:otherwise>
+										<td style="text-align: left;"><button type="button"
+												class="btn btn-primary" data-toggle="modal"
+												data-target="#staticBackdrop" id="user-file-upload-btn"
+												value="upload">파일업로드</button> <span id="file-upload-preview"></span>
+										</td>
+									</c:otherwise>
+								</c:choose>
 							</tr>
-
 							<!-- 이미지 업로드 -->
 							<tr>
 								<td style="text-align: left;"><button type="button"
@@ -77,18 +81,15 @@
 							</tr>
 							<tr>
 								<td><textarea class="form-control" placeholder="글내용"
-										name="bbsContent" maxlength="2048" style="height: 350px;"><c:out
+										id="bbsContent" name="bbsContent" maxlength="2048" style="height: 350px;"><c:out
 											value="${bbs.bbsContent }" /></textarea></td>
 							</tr>
 						</tbody>
 					</table>
 					<input type="hidden" name="bbsId" value="${bbs.bbsId }" />
-					<c:if
-						test="${hasNofile eq BBSFileCheckFunction.BBS_FILE_FIND_SUCCESS}">
-						<input type="hidden" name="fileNo" value="${bbsFile.fileNo }" />
-					</c:if>
-					<input type="button" class="btn btn-dark pull-right" value="수정하기"
-						onclick="bbsInfoConfirm();" />
+					<input id="write-page-file-no" type="hidden" name="fileNo" value="${bbs.fileNo }" />
+					<input type="button" class="btn btn-dark pull-right" value="수정하기" id="bbs-update-btn"
+						/>
 				</form>
 			</div>
 		</div>
@@ -97,6 +98,6 @@
 		<%@include file="../common/footerPage.jsp"%>
 	</div>
 	<!-- 파일업로드 Modal Page -->
-	<%@include file="BBSfileModalUpdate.jsp"%>
+	<%@include file="BBSfileModal.jsp"%>
 </body>
 </html>
