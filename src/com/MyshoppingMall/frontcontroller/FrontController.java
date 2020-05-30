@@ -86,7 +86,9 @@ public class FrontController extends HttpServlet {
 		} else if (com.equals("/BBSwrite.do")) {
 			command = new BBSWriteCommand();
 			command.execute(request, response);
-			viewPage = "BBSPage/BBSwriteCheck.jsp";
+			int bbsId = (int) request.getAttribute("bbsId");
+			viewPage = "BBSviewPage.do?bbsId="+bbsId;
+			//viewPage = "BBSmainPage.do";
 		//게시판 자세히 보기 페이지
 		} else if(com.equals("/BBSviewPage.do")) {
 			command = new BBSViewCommand();

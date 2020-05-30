@@ -12,7 +12,7 @@ public class QueryUtil {
 	static {
 		try {
 			
-			prop.load(new FileInputStream("C:\\Projects\\Jsp\\BBS\\src\\com\\MyshoppingMall\\bbs\\util\\query.properties"));
+			prop.load(Class.forName("com.MyshoppingMall.bbs.util.QueryUtil").getResourceAsStream("query.properties"));
 		}catch(Exception e) {
 			e.printStackTrace();
 			throw new RuntimeException(e);

@@ -28,27 +28,34 @@ public class BBSWriteCommand implements Bcommand {
 		
 		try {
 			request.setCharacterEncoding("utf-8");
-			String jsonData = request.getParameter("jsonData");
-			JsonParser parser = new JsonParser();
-			JsonElement element = parser.parse(jsonData);
-			String bbsTitle = element.getAsJsonObject().get("bbsTitle").getAsString();
-			String bbsContent = element.getAsJsonObject().get("bbsContent").getAsString();
-			int fileNo = element.getAsJsonObject().get("fileNo").getAsInt();
+			String bbsTitle = request.getParameter("bbsTitle");
+			String bbsContent = request.getParameter("bbsContent");
+			int fileNo = Integer.parseInt(request.getParameter("fileNo"));
+			
+//			String jsonData = request.getParameter("jsonData");
+//			JsonParser parser = new JsonParser();
+//			JsonElement element = parser.parse(jsonData);
+//			String bbsTitle = element.getAsJsonObject().get("bbsTitle").getAsString();
+//			String bbsContent = element.getAsJsonObject().get("bbsContent").getAsString();
+//			int fileNo = element.getAsJsonObject().get("fileNo").getAsInt();
 			System.out.println(bbsTitle);
 			System.out.println(bbsContent);
 			System.out.println("fileNO  : "+fileNo);
 			System.out.println("userId : " + userId);
 			int bbsId = bbsService.addBbs(bbsTitle, bbsContent, userId, fileNo);
 			System.out.println("bbsId " + bbsId);
+			request.setAttribute("bbsId", bbsId);
 			
+//			response.sendRedirect("BBSviewPage.do?bbsId="+bbsId);
 			
-			Gson gson = new Gson();
-			JsonObject obj = new JsonObject();
-			obj.addProperty("bbsId", bbsId);
-			String json = gson.toJson(obj);
-			PrintWriter out = response.getWriter();
-			out.print(bbsId);
-			
+//			Gson gson = new Gson();
+//			JsonObject obj = new JsonObject();
+//			obj.addProperty("bbsId", bbsId);
+//			String json = gson.toJson(obj);
+//			response.setContentType("application/json");
+//			PrintWriter out = response.getWriter();
+//			out.print(json);
+//			out.flush();
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -56,11 +63,6 @@ public class BBSWriteCommand implements Bcommand {
 		
 		
 		
-		
-		
-//		String bbsTitle = request.getParameter("bbsTitle");
-//		String bbsContent = request.getParameter("bbsContent");
-//		System.out.println(userId);
 		
 		
 	}

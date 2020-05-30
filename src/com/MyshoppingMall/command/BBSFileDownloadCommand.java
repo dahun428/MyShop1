@@ -17,7 +17,7 @@ public class BBSFileDownloadCommand implements Bcommand {
 		String fileName = request.getParameter("file");
 		BbsFile bbsFile = fileService.getBbsFileByFileName(fileName);
 		try {
-			FileUtil.fileDownloadExecute(request, response, bbsFile, directory);
+			FileUtil.fileDownloadExecute(request, response, bbsFile.getFileName(), directory);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

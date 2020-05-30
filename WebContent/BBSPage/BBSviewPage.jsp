@@ -37,7 +37,6 @@
 			<%@include file="../common/navPage.jsp"%>
 		</div>
 		<div class="body">
-			<%@include file="BBSviewCheck.jsp"%>
 			<div class="container-fluid" style="margin-top: 2rem;">
 
 				<!-- table container-row -->
@@ -63,9 +62,9 @@
 								</tr>
 								<tr class="text-center">
 									<td>파일</td>
-									<td><c:if test="${bbsFile.fileNo ne 0 }">
-											<a href="downloadAction?file=${bbsFile.fileName }"><c:out
-													value="${bbsFile.fileRealName }" /></a>
+									<td><c:if test="${bbs.fileNo ne 0 }">
+											<a href="downloadAction?file=${bbsFile.fileRealName }"><c:out
+													value="${bbsFile.fileName }" /></a>
 										</c:if></td>
 									<td></td>
 									<td></td>

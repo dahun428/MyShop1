@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.MyshoppingMall.bbs.checkFunction.BBSCheckFunction;
 import com.MyshoppingMall.bbs.checkFunction.BBSFileCheckFunction;
 import com.MyshoppingMall.bbs.dao.BbsDAO;
+import com.MyshoppingMall.bbs.dao.BbsFileDAO;
 import com.MyshoppingMall.bbs.vo.Bbs;
 import com.MyshoppingMall.bbs.vo.BbsFile;
 import com.MyshoppingMall.service.BbsFileService;
@@ -21,20 +22,13 @@ public class BBSViewCommand implements Bcommand {
 		int bbsId = Integer.parseInt(request.getParameter("bbsId"));
 		System.out.println(bbsId);
 		Bbs bbs = bbsService.getBbsBybbsId(bbsId);
-		if(bbs == null) {
-			request.setAttribute("isSuccess", BBSCheckFunction.BBS_NO_ARTICLE);
-			return;
-		} else {
-			request.setAttribute("bbs", bbs);
-		}
-//		int fileNo = Integer.parseInt(request.getParameter("fileNo"));
-//		BbsFile bbsFile = fileService.getBbsFileByFileNo(fileNo);
-//		if(bbsFile == null) {
-//			request.setAttribute("hasNofile", BBSFileCheckFunction.BBS_FILE_FIND_SUCCESS);
-//			return;
-//		} else {
-//			request.setAttribute("bbsFile", bbsFile);
-//		}
+		BbsFileDAO fileDao = new BbsFileDAO();
+		int fileNo = bbs.getFileNo();
+		System.out.println("fileNo : " +fileNo);
+		BbsFile bbsFile = fileDao.getBbsFileByFileNo(fileNo);
+		request.setAttribute("bbs", bbs);
+		request.setAttribute("bbsFile", bbsFile);
+
 	}
 
 }

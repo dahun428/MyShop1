@@ -42,7 +42,6 @@
 			<%@include file="../common/navPage.jsp"%>
 		</div>
 		<div class="body">
-
 			<!-- table container-row -->
 			<div class="container" style="margin-top: 2rem;">
 				<form action="/BBSwrite.do" method="post" name="BBSwriteForm" id="BBSwriteForm">

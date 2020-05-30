@@ -347,7 +347,7 @@ public class BbsDAO {
 		bbs.setBbsNo(rs.getInt("NO"));
 		bbs.setBbsId(rs.getInt("BBS_ID"));
 		bbs.setBbsTitle(rs.getString("BBS_TITLE"));
-
+		bbs.setFileNo(rs.getInt("file_no"));
 		User user = new User();
 		user.setUserId(rs.getString("USER_ID"));
 		bbs.setUser(user);
