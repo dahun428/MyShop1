@@ -1,6 +1,7 @@
 package com.MyshoppingMall.servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
@@ -20,6 +21,12 @@ import com.MyshoppingMall.bbs.vo.BbsFile;
 import com.MyshoppingMall.bbs.vo.User;
 import com.MyshoppingMall.service.BbsFileService;
 import com.MyshoppingMall.service.UserService;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 /**
  * Servlet implementation class fileUploadAction
@@ -29,8 +36,7 @@ public class fileUploadAction_disabled extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-				
+	
 		String directory = "/upload";
 		HttpSession session = request.getSession();
 		String userId = (String) session.getAttribute("userId");
@@ -60,20 +66,22 @@ public class fileUploadAction_disabled extends HttpServlet {
 			System.out.println(bbsFile);
 			int fileNo = fileService.uploadFile(bbsFile);
 			
-			request.setAttribute("bbsFileName", bbsFile.getFileName());
-			request.setAttribute("bbsFileRealName", bbsFile.getFileRealName());
-			request.setAttribute("fileNo", fileNo);
-			request.setAttribute("isSuccess", BBSFileCheckFunction.BBS_FILE_UPLOAD_SUCCESS);
+			JsonObject obj = new JsonObject();
+			Gson gson = new GsonBuilder().setPrettyPrinting().create();
+			
+			response.setCharacterEncoding("utf-8");
+			response.setContentType("application/json");
+			obj.addProperty("bbsFileName", bbsFile.getFileName());
+			obj.addProperty("bbsFileRealName", bbsFile.getFileRealName());
+			obj.addProperty("fileNo", fileNo);
+			
+			String json = gson.toJson(obj);
+			response.getWriter().write(json);
 			System.out.println("업로드");
 			System.out.println(fileNo);
 		} catch (Exception e) {
-			request.setAttribute("isSuccess", BBSFileCheckFunction.BBS_FILE_UPLOAD_FAIL);
 			System.out.println("업로드 실패");
-		} finally {
-//			response.sendRedirect("BBSPage/BBSwritePage.jsp");
-			RequestDispatcher dispatcher = request.getRequestDispatcher("BBSwritePage.jsp");
-			dispatcher.forward(request, response);
-		}
+		} 
 
 	}
 

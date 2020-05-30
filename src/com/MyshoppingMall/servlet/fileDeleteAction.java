@@ -36,7 +36,7 @@ public class fileDeleteAction extends HttpServlet {
 
 		String directory = "/upload";
 		String fileName = request.getParameter("userfileName");
-		
+		System.out.println(fileName);
 		BbsFile bbsFile = fileService.getBbsFileByFileName(fileName);
 		
 		System.out.println("fileName : "+fileName);

@@ -22,56 +22,28 @@
 					</div>
 					<div class="form-group">
 						<div class="modal-body">
-							<label for="custom-file">파일첨부</label>
-							<c:choose>
-								<c:when
-									test="${isSuccess == BBSFileCheckFunction.BBS_FILE_UPLOAD_SUCCESS }">
-									<%
-										request.setAttribute("inValidate", "inValidate");
-									%>
-									<input type="file" id="bbs-file-set"
-										data-class-button="btn btn-default"
-										data-class-input="form-control" data-icon-name="fa fa-upload"
-										tabindex="-1"
-										style="postion: absolute; clip: rect(0px, 0px, 0px, 0px);"
-										class="custom-file-input" name="bbs-file" />
-									<div class="bootstrap-filestyle input-group">
-										<input type="text" id="userfile" class="form-control"
-											name="userfile" value="${bbsFileName }" readonly="readonly" />
-										<input type="hidden" id="user-file-real-name" value="${bbsFileRealName }" />	
-										<span class="group-span-filestyle input-group-btn"
-											tabindex="0" id="file-input-btn"><label for="bbs-file-set"
-											class="btn btn-default"> <span class="glyphicon fa fa-upload"></span>
-										</label>
-										</span>
+							<label for="custom-file">파일첨부</label> <input type="file"
+								id="bbs-file-set" data-class-button="btn btn-default"
+								data-class-input="form-control" data-icon-name="fa fa-upload"
+								tabindex="-1"
+								style="postion: absolute; clip: rect(0px, 0px, 0px, 0px);"
+								class="custom-file-input" name="bbs-file" />
+							<div class="bootstrap-filestyle input-group">
+								<input type="text" id="userfile" class="form-control"
+									name="userfile" value="파일을 첨부해주세요" readonly="readonly" /> <span
+									class="group-span-filestyle input-group-btn" tabindex="0">
+									<label for="bbs-file-set" class="btn btn-default"> <span
+										class="glyphicon fa fa-upload"></span>
+								</label>
+								</span>
+							</div>
 
-									</div>
-								</c:when>
-								<c:otherwise>
-									<input type="file" id="bbs-file-set"
-										data-class-button="btn btn-default"
-										data-class-input="form-control" data-icon-name="fa fa-upload"
-										tabindex="-1"
-										style="postion: absolute; clip: rect(0px, 0px, 0px, 0px);"
-										class="custom-file-input" name="bbs-file" />
-									<div class="bootstrap-filestyle input-group">
-										<input type="text" id="userfile" class="form-control"
-											name="userfile" value="파일을 첨부해주세요" readonly="readonly" /> 
-								
-										<span class="group-span-filestyle input-group-btn" tabindex="0">
-											<label for="bbs-file-set" class="btn btn-default"> <span
-												class="glyphicon fa fa-upload"></span>
-										</label>
-										</span>
-									</div>
-								</c:otherwise>
-							</c:choose>
 						</div>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary"
 							data-dismiss="modal">취소</button>
-						<button id="fileUpload-btn" type="submit" class="btn btn-primary">확인</button>
+						<button id="fileUpload-btn" type="button" class="btn btn-primary">확인</button>
 					</div>
 				</div>
 			</form>

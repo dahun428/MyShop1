@@ -55,18 +55,18 @@
 							<tr>
 								<td style="text-align: left;"><button type="button"
 										class="btn btn-primary" data-toggle="modal"
-										data-target="#staticBackdrop">파일업로드</button> <c:if
-										test="${isSuccess eq BBSFileCheckFunction.BBS_FILE_UPLOAD_SUCCESS}">
-
-										<%
-												String path = request.getContextPath();
-													String fileName = (String) request.getAttribute("bbsFileName");
-													String fileRealName = (String) request.getAttribute("bbsFileRealName");
-													out.write("<a href=\"" + path + "/downloadAction?file=" + URLEncoder.encode(fileName, "utf-8") + "\">"
-															+ fileRealName + "</a>");
-											%>
-
-									</c:if></td>
+										data-target="#staticBackdrop">파일업로드</button> <c:choose>
+										<c:when
+											test="${bbs.fileNo ne 0 }">
+											<c:set value="${bbsFile }" var="bbsFile"/>
+											<c:set value="${bbsFile.fileName }" var="fileName"/>
+											<c:set value="${bbsFile.fileRealName }" var="fileRealName"/>
+											<a id="existFile" href="downloadAction?file=${bbsFile.fileRealName }"><c:out
+													value="${bbsFile.fileName }" /></a>
+											<button id="user-file-delete-btn"
+												class="btn btn-primary float-right" type="button">삭제</button>
+										</c:when>
+									</c:choose></td>
 							</tr>
 
 							<!-- 이미지 업로드 -->

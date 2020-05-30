@@ -109,22 +109,26 @@ public class FrontController extends HttpServlet {
 			command.execute(request, response);
 			viewPage = "BBSPage/BBSdeleteCheck.jsp";
 		//게시판 파일 업로드 기능 실행
-		} else if(com.equals("/BBSfileUploadPageAction.do")) {
-			command = new BBSFileUploadCommand();
-			command.execute(request, response);
-			viewPage = "BBSPage/BBSwritePage.jsp";
+			
+			
+//		} else if(com.equals("/BBSfileUpload.do")) {
+//			command = new BBSFileUploadCommand();
+//			command.execute(request, response);
+//			viewPage = "BBSPage/BBSwritePage.jsp";
 		//게시판 파일 업로드 수정 기능 실행	
-		} else if(com.equals("/BBSfileUploadPageActionUpdate.do")) {
-			command = new BBSFileUploadCommand();
-			command.execute(request, response);
-			viewPage = "BBSPage/BBSupdatePage.jsp";
-		} else if (com.equals("/BBSwritePage.do")) {
-			viewPage = "BBSPage/BBSwritePage.jsp";
+//		} else if(com.equals("/BBSfileUploadPageActionUpdate.do")) {
+//			command = new BBSFileUploadCommand();
+//			command.execute(request, response);
+//			viewPage = "BBSPage/BBSupdatePage.jsp";
+//		} else if (com.equals("/BBSwritePage.do")) {
+//			viewPage = "BBSPage/BBSwritePage.jsp";
 		//게시판 파일 업로드 수행
-		} else if(com.equals("/BBSfileUpload.do")) {
-			command = new BBSFileUploadCommand();
-			command.execute(request, response);
-			viewPage = "/BBSPage/BBSwritePage.jsp";
+			
+			
+//		} else if(com.equals("/BBSfileUpload.do")) {
+//			command = new BBSFileUploadCommand();
+//			command.execute(request, response);
+//			viewPage = "/BBSPage/BBSwritePage.jsp";
 		}
 		RequestDispatcher rd = request.getRequestDispatcher(viewPage);
 		rd.forward(request, response);

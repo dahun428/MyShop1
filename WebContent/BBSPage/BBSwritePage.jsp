@@ -44,7 +44,8 @@
 		<div class="body">
 			<!-- table container-row -->
 			<div class="container" style="margin-top: 2rem;">
-				<form action="/BBSwrite.do" method="post" name="BBSwriteForm" id="BBSwriteForm">
+				<form action="/BBSwrite.do" method="post" name="BBSwriteForm"
+					id="BBSwriteForm">
 					<table class="table">
 						<thead class="table-dark text-center">
 							<tr>
@@ -60,22 +61,9 @@
 							<tr>
 								<td style="text-align: left;"><button type="button"
 										class="btn btn-primary" data-toggle="modal"
-										data-target="#staticBackdrop" id="user-file-upload-btn">파일업로드</button>
-									<c:choose>
-										<c:when
-											test="${isSuccess eq BBSFileCheckFunction.BBS_FILE_UPLOAD_SUCCESS}">
-											<%
-												String path = request.getContextPath();
-											String fileName = (String) request.getAttribute("bbsFileName");
-											String fileRealName = (String) request.getAttribute("bbsFileRealName");
-											out.write("<a id=\"existFile\" href=\"" + path + "/downloadAction?file=" + URLEncoder.encode(fileRealName, "utf-8")
-													+ "\">" + fileName + "</a>");
-											%>
-											<button id="user-file-delete-btn"
-												class="btn btn-primary float-right" type="button">삭제</button>
-										</c:when>
-									</c:choose></td>
-
+										data-target="#staticBackdrop" id="user-file-upload-btn" value="upload">파일업로드</button>
+									<span id="file-upload-preview"></span>
+								</td>
 							</tr>
 							<!-- 파일 업로드  end-->
 
@@ -93,8 +81,8 @@
 						</tbody>
 					</table>
 					<input type="hidden" name="fileNo" value="<%=fileNo%>" /> <input
-						type="button" class="btn btn-dark pull-right" id="bbs-write-btn" value="글쓰기"
-						/>
+						type="button" class="btn btn-dark pull-right" id="bbs-write-btn"
+						value="글쓰기" />
 				</form>
 			</div>
 
@@ -106,6 +94,6 @@
 	</div>
 	<!-- 파일업로드 Modal Page -->
 	<%@include file="BBSfileModal.jsp"%>
-	
+
 </body>
 </html>
