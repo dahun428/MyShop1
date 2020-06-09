@@ -16,7 +16,7 @@ $(document).ready(function(){
 		
 		
 	});
-	
+	//할인가 입력 선택 라디오
 	$('input:radio[name="discountSelect"]').change(function(){
 		if($('input:radio[id="discountSelect-price"]').is(':checked')){
 			disocuntSelectPriceBox.attr('disabled',false);
@@ -56,26 +56,44 @@ $(document).ready(function(){
 			$('input[name=productName]').focus();
 			return;
 		}
-		if(!$('input[name=category]').val()){
-			target.text('카테고리를 입력해주세요');
-			$('input[name=category]').focus();
+		if(!$('input[name="brand"]').val()){
+			target.text('브랜드를 입력해주세요');
+			$('input[name="brand"]').focus();
 			return;
 		}
+		if($('input[id=category-inputBox]').val().length < 1 && $('#category-selectBox option:selected').val().length < 1){
+			target.text('카테고리를 입력해주세요');
+			$('input[name=category]').focus();
+			return;			
+		}
+		if(!$('input[name=maker]').val()){
+			target.text('제조사를 입력해주세요');
+			$('input[name="maker"]').focus();
+			return;
+		}
+		if(!$('input[name="price"]').val()){
+			target.text('가격을 입력해주세요');
+			$('input[name="price"]').focus();
+			return;
+		}
+		var confirmed = confirm('이대로 등록하시겠습니까?');
+		if(confirmed){
+			$('#product-add-form').submit();
+		}
 	});
-	$('input:radio[name="categoryRadio"]').change(function(){
-		
-		alert('1');
-		//var categoryInputRadio = $('input:radio[id="category-input-radio"]');
-		//var categorySelectBox = $('#category-selectBox');
-		//var categoryInputBox = $('#category-inputBox');
+	//카테고리 입력 선택 라디오
+	$('input:radio[name="categoryRadio"]').on('change',function(){
+		var categoryInputRadio = $('input:radio[id="category-input-radio"]');
+		var categorySelectBox = $('#category-selectBox');
+		var categoryInputBox = $('#category-inputBox');
 
-		//if(categoryInputRadio.is(':checked')){
-		//	categoryInputBox.attr('disabled',false);
-		//	categorySelectBox.attr('disabled',true);			
-		//} else {
-		//	categoryInputBox.attr('disabled',true);
-		//	categorySelectBox.attr('disabled',false);	
-		//}
+		if(categoryInputRadio.is(':checked')){
+			categoryInputBox.attr({disabled : false , name : "category"});
+			categorySelectBox.attr('disabled',true).val("");			
+		} else {
+			categoryInputBox.attr({disabled : true , name : "categoryInput"}).val("");
+			categorySelectBox.attr({disabled : false , name : "category"});
+		}
 	
 	});
 

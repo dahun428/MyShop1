@@ -6,6 +6,7 @@ public class Product {
 
 
 	private int no;
+	private String brand;
 	private String productName;
 	private String category;
 	private int price;
@@ -15,22 +16,39 @@ public class Product {
 	private int point;
 	private String maker;
 	private Date registeredDate;
-
-
+	private String detail;
+	private String viewYn;
+	
 	//	상품 넘버, 이름, 카테고리, 가격, 할인가격, 재고, 좋아요, 제조사,등록일, 포인트
 	public Product() {}
 
 
+	public void setViewYn(String viewYn) {
+		this.viewYn = viewYn;
+	}
+	public String getViewYn() {
+		return viewYn;
+	}
 	public int getNo() {
 		return no;
 	}
-
+	public void setDetail(String detail) {
+		this.detail = detail;
+	}
+	public String getDetail() {
+		return detail;
+	}
 
 	public void setNo(int no) {
 		this.no = no;
 	}
 
-
+	public void setBrand(String brand) {
+		this.brand = brand;
+	}
+	public String getBrand() {
+		return brand;
+	}
 	public String getProductName() {
 		return productName;
 	}

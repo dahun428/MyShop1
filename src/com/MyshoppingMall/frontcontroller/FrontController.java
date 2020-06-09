@@ -132,6 +132,14 @@ public class FrontController extends HttpServlet {
 			command = new UserUpdateCommand();
 			command.execute(request, response);
 			viewPage = "USERPage/mypageUserInfoUpdate.jsp";
+		} else if(com.equals("/addProduct.do")) {
+			command = new ProductInsertCommand();
+			command.execute(request, response);
+			viewPage = "productlist.do";
+		} else if(com.equals("/productlist.do")) {
+			command = new ProductMainCommand();
+			command.execute(request, response);
+			viewPage = "managerpage/product_list.jsp";
 		}
 		RequestDispatcher rd = request.getRequestDispatcher(viewPage);
 		rd.forward(request, response);
