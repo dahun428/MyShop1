@@ -8,6 +8,7 @@ import org.apache.commons.codec.digest.DigestUtils;
 
 import com.MyshoppingMall.bbs.checkFunction.JoinCheckFunction;
 import com.MyshoppingMall.bbs.checkFunction.LoginCheckFunction;
+import com.MyshoppingMall.bbs.checkFunction.UserCheckFunction;
 import com.MyshoppingMall.bbs.util.ConnUtil;
 import com.MyshoppingMall.bbs.util.QueryUtil;
 import com.MyshoppingMall.bbs.vo.User;
@@ -66,11 +67,11 @@ public class UserDAO {
 	 * @param userId
 	 * @return
 	 */
-	public User getUser(String userId) {
+	public User getUserByUserId(String userId) {
 		User user = null;
 
 		try {
-			String query = "SELECT USER_ID, USER_NAME, USER_GENDER, USER_EMAIL FROM BBS_USER WHERE USER_ID = ?";
+			String query = QueryUtil.getSQL("User.getUserByUserId");
 			conn = ConnUtil.getConnection();
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, userId);
@@ -78,9 +79,11 @@ public class UserDAO {
 			if(rs.next()) {
 				user = new User();
 				user.setUserId(rs.getString("user_id"));
+				user.setUserPassword(rs.getString("user_password"));
 				user.setUserGender(rs.getString("user_gender"));
 				user.setUserName(rs.getString("user_name"));
 				user.setUserEmail(rs.getString("user_email"));
+				user.setRegisteredDate(rs.getDate("registered_date"));
 
 			}
 			return user;
@@ -188,7 +191,7 @@ public class UserDAO {
 		
 	}
 	
-	public void updateUser(User user, String userPassword) {
+	public int updateUser(User user) {
 		
 		String query = QueryUtil.getSQL("User.updateUser");
 		
@@ -199,19 +202,22 @@ public class UserDAO {
 			pstmt.setString(1, encryptionPw);
 			pstmt.setString(2, user.getUserEmail());
 			pstmt.setString(3, user.getUserId());
-			pstmt.setString(4, userPassword);
+			pstmt.executeUpdate();
 			
+			return UserCheckFunction.UPDATE_SUCCESS;
 			
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
 			try {
-				
+				if(pstmt != null) pstmt.close();
+				if(conn != null ) conn.close();
 			}catch(Exception e) {
 				e.printStackTrace();
 			}
 		}
 		
+		return UserCheckFunction.UPDATE_FAIL;
 	}
 	
 

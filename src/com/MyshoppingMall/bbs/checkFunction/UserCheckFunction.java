@@ -10,6 +10,7 @@ public class UserCheckFunction {
 	public final static int JOIN_FAIL = -1;
 	public final static int EXIST_USER = -1;
 	public final static int NON_EXIST_USER = 1;
-	
+	public final static int UPDATE_SUCCESS = 1;
+	public final static int UPDATE_FAIL = -2;
 	
 }

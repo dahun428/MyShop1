@@ -1,6 +1,9 @@
 
-
 $(document).ready(function(){
+	
+});
+$(document).ready(function(){
+	
 	let userId = $('#userId');
 	let userPassword = $('#userPassword');
 	userId.click(function(){
@@ -9,8 +12,43 @@ $(document).ready(function(){
 	userPassword.click(function(){
 		userPassword.change_origin();
 	});
+	
+	//회원정보 수정기능
+	$('#mypageLoginBtn').click(function(){
+		var objForm = get_form_data($('#mypage-user-update-form'));
+		var userPassword = $('input[name=userPassword]');
+		var userPasswordChk = $('input[name=userPasswordChk');
+		var target = $('#usercheck-place');
+		if(userPassword.val().length < 1 || userPasswordChk.val().length < 1){
+			target.text('비밀번호를 입력해주세요.');
+			userPassword.focus();
+			return;
+		}
+		if(userPassword.val().length < 4){
+			target.text('비밀번호를 4글자 이상 입력해주세요');
+			userPassword.focus();
+			return;
+		}
+		if(userPassword.val() !== userPasswordChk.val()){
+			target.text('비밀번호를 확인해주세요.');
+			userPassword.focus();
+			return;
+		}
+		var jsonData = JSON.stringify(objForm);
+		$.ajax({
+			type:"POST",
+			dataType:"json",
+			url:"../userUpdateAction",
+			data:{jsonData:jsonData},
+			success:function(data){
+				alert('회원정보가 수정되었습니다. 로그인을 다시 해주세요');
+				location.href='userLogoutAction';
+			}
+		});
+		
+	});
 	//로그인 확인 기능
-	$('#userLoginBtn').login_check($('#userLoginForm'),"userLoginAction");
+	$('#userLoginBtn').login_check($('#userLoginForm'),"/userLoginAction");
 	//로그아웃 확인 기능  
 	$('#userLogout').click(function(){
 		$.ajax({
@@ -221,7 +259,7 @@ $.fn.login_check = function(form,customUrl){
 			data:{jsonData:jsonData},
 			success:function(result){
 				if(result.isSuccess === 1){
-					alert(objArray.userId + "님 반갑습니다.");
+					
 					history.go(0);
 					return;
 				}

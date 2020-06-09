@@ -19,7 +19,7 @@ public class ConnUtil {
 	public static Connection getConnection() throws SQLException{
 		String url = "jdbc:oracle:thin:@localhost:1521:xe";
 		String user = "hr";
-		String password ="hr";
+		String password ="zxcv1234";
 		
 		Connection connection = DriverManager.getConnection(url, user, password);
 		

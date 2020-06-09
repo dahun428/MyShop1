@@ -4,14 +4,9 @@
 <html>
 <body>
 <!-- navigation -->
-	<div class="navbar navbar-expand-sm navbar-dark bg-dark">
+	<div class="navbar navbar-expand-lg navbar-dark bg-dark">
 	<!-- toggler start -->
-		<button class="navbar-toggler" type="button" data-toggle="collapse"
-			data-target="#navbarSupportedContent"
-			aria-controls="navbarSupportedContent" aria-expanded="false"
-			aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-		</button>
+	
 	<!-- toggler end -->
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto text-center">
@@ -31,7 +26,7 @@
 				<li class="nav-item"><a href="#" class="nav-link">베스트</a></li>
 				<li class="nav-item"><a href="#" class="nav-link">기획전</a></li>
 				<li class="nav-item"><a href="#" class="nav-link">이벤트</a></li>
-				<li class="nav-item"><a href="/BBSmainPage.do" class="nav-link">게시판</a>
+				<li class="nav-item"><a href="/BBSmainPage.do" class="nav-link">문의게시판</a>
 				</li>
 			</ul>
 		</div>
